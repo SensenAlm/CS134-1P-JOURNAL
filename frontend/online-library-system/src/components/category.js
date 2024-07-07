@@ -106,26 +106,21 @@ export default function Category({ search, category }) {
 
     return (
         <div class="">
-            <table class=" tw-table-fixed tw-text-center tw-w-full">
-                <thead class="tw-text-center tw-bg-steel-blue">
-                    <tr class="tw-text-text-blue">
-                        {/* <th class="sm:tw-hidden">No.</th> */}
+            <table class=" tw-table-fixed tw-text-center tw-w-full sm:tw-shadow-lg">
+                <thead class="tw-text-center tw-bg-leaf-green">
+                    <tr class="tw-text-white">
                         <th class="sm:tw-hidden tw-py-4">Title</th>
                         <th class="sm:tw-hidden tw-py-4">Author</th>
                         <th class="md:tw-hidden tw-py-4">Journal</th>
                         <th class="sm:tw-hidden">Category</th>
                         <th class="sm:tw-hidden">Year</th>
-                        {/* <th>Actions</th> */}
-                        {/* <th scope="col"></th> */}
                     </tr>
                 </thead>
 
-                <tbody class="tw-divide-y tw-divide-gray-300 tw-bg-gray-100">
+                <tbody class="tw-divide-y tw-divide-gray-300 tw-bg-white">
                     {currentPost.map((d, i) => (
                         <tr key={i}>
-                            {/* <th class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{indexOfFirstPost + 1 + i}</th> */}
                             <td class="tw-break-words tw-text-left tw-text-wrap tw-pl-4 tw-pr-3 tw-text-gray-900 sm:tw-pl-6 sm:tw-pt-4">
-                                {/* {d.title} */}
                                 <Link to={`/pdfView/${d.destination}`} onClick={updStat}>
                                     {d.title}
                                 </Link>
@@ -139,12 +134,6 @@ export default function Category({ search, category }) {
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.author}</td>
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.category}</td>
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.year}</td>
-                            {/* <td class="tw-py-4  tw-pl-4 tw-pr-3 tw-justify-center">
-                                <button class=" tw-bg-btn-blue tw-border-none tw-mr-2 tw-outline-none hover:tw-bg-dark-steel tw-duration-500 tw-rounded-md"
-                                    onClick={() => updStat(d.destination, d.title)}>
-                                    <i class="bi bi-eye-fill tw-text-xl tw-text-text-blue"></i>
-                                </button>
-                            </td> */}
                         </tr>
                     ))}
                 </tbody>

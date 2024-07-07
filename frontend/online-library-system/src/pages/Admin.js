@@ -129,8 +129,8 @@ export default function Admin() {
                     onChange={(e) => setFile(e.target.files[0])} /> 
                         </div>
                     </div>
-                    
-                    <button type="submit" class="tw-bg-green tw-rounded-md tw-h-[40px] tw-px-6 tw-border-none tw-outline-none hover:tw-bg-dark-green tw-duration-500 tw-text-white">
+
+                    <button type="submit" class=" tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-6 tw-border-none tw-outline-none hover:tw-bg-dark-green tw-duration-500 tw-text-white">
                         Submit
                     </button>
                 </form>

@@ -50,7 +50,7 @@ export default function Sidebar() {
                     </div>
 
                     <div class="tw-mt-3 tw-flex tw-flex-col tw-duration-300 tw-cursor-pointer tw-gap-y-2 tw-mx-5">
-                        <button class={`${isActivePage('/admin-pdf-monitor') ? "tw-bg-slate-500" : ""} tw-text-left tw-text-lg tw-w-full tw-rounded-md tw-py-2 tw-border-none tw-bg-transparent tw-text-white hover:tw-bg-slate-500`}
+                        <button class={`${isActivePage('/admin-dashboard') ? "tw-bg-slate-500" : ""} tw-text-left tw-text-lg tw-w-full tw-rounded-md tw-py-2 tw-border-none tw-bg-transparent tw-text-white hover:tw-bg-slate-500`}
                             onClick={navToDashboard}>
                             <i class={`bi bi-bar-chart-line-fill tw-cursor-pointer tw-mr-2`} />
                             <label class={`tw-cursor-pointer`}>Dashboard</label>
@@ -68,19 +68,13 @@ export default function Sidebar() {
                             <label class={`tw-cursor-pointer`}>Edit PDF</label>
                         </button>
 
-                        {/* <button class={`${isActivePage('/admin-manage-categ') ? "tw-bg-slate-500" : ""} tw-text-left tw-text-lg tw-w-full tw-rounded-md tw-py-2 tw-border-none tw-bg-transparent tw-text-white hover:tw-bg-slate-500`}
-                            onClick={navToCateg}>
-                            <i class={`tw-mr-2 bi bi-pencil-square tw-cursor-pointer`} />
-                            <label class={`tw-cursor-pointer`}>Manage Category</label>
-                        </button> */}
-
                         <button class={`${isActivePage('/admin-monitor') ? "tw-bg-slate-500" : ""} tw-text-left tw-text-lg tw-w-full tw-rounded-md tw-py-2 tw-border-none tw-bg-transparent tw-text-white hover:tw-bg-slate-500`}
                             onClick={navToMonitor}>
                             <i class={`bi bi-person-fill tw-cursor-pointer tw-mr-2`} />
                             <label class={`tw-cursor-pointer`}>Student Monitor</label>
                         </button>
 
-                        <button class={`${isActivePage('/admin-student-management') ? "tw-bg-slate-500" : ""} tw-text-left tw-text-lg tw-w-full tw-rounded-md tw-py-2 tw-border-none tw-bg-transparent tw-text-white hover:tw-bg-slate-500`}
+                        <button class={`${isActivePage('/admin-student-management') ? "tw-bg-slate-500" : "tw-bg-slate-500"} tw-text-left tw-text-lg tw-w-full tw-rounded-md tw-py-2 tw-border-none tw-bg-transparent tw-text-white hover:tw-bg-slate-500`}
                             onClick={navToAccount}>
                             <i class={`bi bi-person-fill-gear tw-cursor-pointer tw-mr-2`}></i>
                             <label class={`tw-cursor-pointer`}>Account Settings</label>

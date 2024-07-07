@@ -16,7 +16,7 @@ export default function Header() {
           <div class="container-fluid">
             <a class="navbar-brand">
               <img src={logo} width="40" alt="Logo" height="40" class="d-inline-block tw-cursor-pointer" onClick={navToHome}/>
-              <label class="tw-pl-2 tw-font-rubik tw-text-white hover:tw-cursor-pointer" onClick={navToHome}>Online Archive System</label>
+              <label class="tw-pl-2 tw-font-rubik tw-text-white tw-cursor-pointer" onClick={navToHome}>Online Archive System</label>
             </a>
 
             <div class="tw-bg-leaf-green tw-rounded-lg">
@@ -31,7 +31,7 @@ export default function Header() {
                   <label class="tw-cursor-pointer tw-text-white">Home</label>
                 </Link>
                 <a class="nav-link dropdown-toggle tw-text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <label class="tw-text-white">Manuscripts</label>
+                  <label class="tw-text-white tw-cursor-pointer">Manuscripts</label>
                   </a>
                 <ul class="dropdown-menu">
                   <li>

@@ -86,7 +86,7 @@ export default function Register() {
                     <div class="elements tw-p-2.5 tw-w-full tw-font-roboto">
                         <button class="lgnbutton tw-flex tw-justify-center tw-items-center tw-w-full tw-bg-leaf-green tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-green tw-duration-500" 
                             onClick={navToLogin}>
-                            <label class="tw-cursor-pointer tw-text-gray-50">Sign In</label></button>
+                            <label class="tw-cursor-pointer tw-text-gray-50">Go back to Sign In</label></button>
                     </div>
                 </form>
             </div>

@@ -25,8 +25,8 @@ export default function Searchbar( {search} ) {
                         value={value}>
                         
                     </input>
-                    <button class="tw-bg-src-yellow tw-rounded-full tw-px-[15px] tw-ml-[-45px] tw-border-none tw-outline-none hover:tw-bg-hover-yellow tw-duration-300" type="submit">
-                        <i class="bi bi-search tw-text-gray-600"></i>
+                    <button class="tw-bg-green tw-rounded-full tw-px-[15px] tw-ml-[-45px] tw-border-none tw-outline-none hover:tw-bg-dark-green tw-duration-500" type="submit">
+                        <i class="bi bi-search tw-text-white"></i>
                     </button>
                 </form>
                 </div>

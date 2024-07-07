@@ -26,7 +26,7 @@ export default function Home() {
                 
                     <div class="md:tw-w-[80%] sm:tw-w-full sm:tw-px-8 md:tw-bg-white tw-p-6 tw-rounded-lg md:tw-shadow-md tw-bg-opacity-[80%]">
                         <Searchbar search={handleSearch}/>
-                        <Category search={searchVal} category={"all-categ"}/>
+                        <Category search={searchVal} category={"all"}/>
                     </div>
                 </div>
             </div>

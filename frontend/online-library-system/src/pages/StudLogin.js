@@ -28,8 +28,7 @@ export default function StudLogin() {
         .then(data => {
             if (data.status === "Success!") {
                 alert(data.status);
-                localStorage.setItem("token", JSON.stringify(data.token));
-                console.log(localStorage.getItem("token"));
+                localStorage.setItem("student", JSON.stringify(data.token));
                 navigate("/category/all");
                 window.location.reload();
             }
@@ -60,12 +59,12 @@ export default function StudLogin() {
             <div class="md:tw-bg-gray-100 sm:tw-bg-gray-200 md:tw-bg-opacity-[80%] sm:tw-bg-opacity-[70%] tw-h-max tw-shadow-lg tw-rounded-lg">
                 <div class="tw-pt-5 tw-flex tw-justify-center tw-items-center tw-font-roboto">
                     <img src={logo} class="tw-h-20 tw-w-20 tw-text-left" alt="RSHS Logo"/>
-                    <h1>Sign In</h1>
+                    <h1>Login</h1>
                 </div>
                 <form className="formStyle tw-w-96 tw-mx-auto tw-p-4">
                     <div class="elements tw-p-2.5 tw-w-full">
                         <div class="form-group">
-                            <label for="lrnLabel">Student LRN</label>
+                            <label for="lrnLabel">Student LRN </label>
                             <input class="form-control focus:tw-placeholder-transparent" id="lrnInput" placeholder="LRN" value={lrn} onChange={(e) => setLrn(e.target.value)}/>
                         </div>
                     </div>
@@ -77,14 +76,14 @@ export default function StudLogin() {
                             </div>
                     </div>
                     <div class="elements tw-p-2.5 tw-w-full tw-font-roboto">
-                        <button type="login" class="lgnbutton tw-flex tw-justify-center tw-items-center tw-w-full tw-bg-leaf-green tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-green tw-duration-500"
+                        <button type="login" class="lgnbutton tw-flex tw-justify-center tw-items-center tw-w-full tw-bg-steel-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-blue tw-duration-500"
                         onClick={(e) => loginButton(e)}>
-                            <label class="tw-cursor-pointer tw-text-gray-50">Sign In</label></button>
+                            <label class="tw-cursor-pointer tw-text-gray-50">Login</label></button>
                     </div>
                     <hr />
 
                     <div class="elements tw-p-2.5 tw-w-full tw-font-roboto">
-                        <button type="register" class="rgtbutton tw-flex tw-justify-center tw-items-center tw-w-full tw-bg-leaf-green tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-green tw-duration-500" 
+                        <button type="register" class="rgtbutton tw-flex tw-justify-center tw-items-center tw-w-full tw-bg-steel-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-blue tw-duration-500" 
                         onClick={navToSignUp}>
                             <label class="tw-cursor-pointer tw-text-gray-100">Sign Up</label></button>
                     </div>

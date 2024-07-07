@@ -4,6 +4,7 @@ const cors = require('cors')
 const pdfRoutes = require('./routes/pdfRoutes');
 const postRoutes = require('./routes/postRoutes');
 const tokenRoute = require('./routes/token');
+const studentRoute = require('./routes/studentRoute');
 
 app.use(cors());
 app.use(express.json());
@@ -39,6 +40,7 @@ mongoose.connect(dbURL,
 app.use('/', postRoutes);
 app.use('/', pdfRoutes);
 app.use('/', tokenRoute);
+app.use('/', studentRoute);
 
 app.listen(8081, ()=> {
     console.log("listening");

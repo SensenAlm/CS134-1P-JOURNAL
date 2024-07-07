@@ -34,7 +34,7 @@ export default function Sidebar() {
     }
 
     const navToLogin = () => {
-        Delete();
+        Delete("admin");
         navigate('/admin-login');
     }
 

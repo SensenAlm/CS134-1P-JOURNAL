@@ -28,138 +28,64 @@ router.get('/all-categ', (req, res)=> {
     } 
     
  })
- 
- router.get('/math-categ', (req, res)=> {
-     try {
-         PdfDetailsSchema.find({category: "Mathematics"}).then((data) => {
-             res.send(data);
-         });
- 
-     } catch (error) {
-         res.send()
-     } 
- })
- 
- router.get('/soc-sci-categ', (req, res)=> {
-     try {
-         PdfDetailsSchema.find({category: "Social Science"}).then((data) => {
-             res.send(data);
-         });
- 
-     } catch (error) {
-         res.send()
-     } 
- })
 
- router.get('/phys-sci-categ', (req, res)=> {
-    try {
-        PdfDetailsSchema.find({category: "Physical Science"}).then((data) => {
-            res.send(data);
-        });
+ router.get('/students/manuscripts/:category?/', (req, res) => {
+    const searchVal = req.query.search ? req.query.search.split(" ") : [];
+    
 
-    } catch (error) {
-        res.send()
-    } 
-})
- 
- router.get('/robotics-categ', (req, res)=> {
-     try {
-         PdfDetailsSchema.find({category: "Robotics"}).then((data) => {
-             res.send(data);
-         });
- 
-     } catch (error) {
-         res.send()
-     } 
- })
- 
- router.get('/life-sci-categ', (req, res)=> {
-     try {
-         PdfDetailsSchema.find({category: "Life Science"}).then((data) => {
-             res.send(data);
-         });
- 
-     } catch (error) {
-         res.send()
-     } 
- })
-
- router.get('/reg-list', (req, res) => {
-    try {
-        regStudentsSchema.find({}).then((data) => {
-            res.send(data);
-        });
-    } catch (error) {
-        res.send()
-    }
- })
-
- router.get('/student-list', (req, res) => {
-    try {
-        studInfoSchema.find({}).then((data) => {
-            res.send(data);
-        });
-    } catch (error) {
-        res.send()
-    }
- })
-
- router.get('/pdf-statistics', (req, res) => {
-    // try {
-    //     pdfStatistics.find({}).then((data) => {
-    //         res.send(data);
-    //     });
-    // } catch (error) {
-    //     res.send(error);
-    // }
- })
-
- router.post('/searchbar-category', (req, res) => {
-    var category;
-    if (req.body.Categ === 'life-sci-categ') {
-        category = "Life Science";
-    }
-    else if (req.body.Categ === 'robotics-categ') {
-        category = "Robotics";
-    }
-    else if (req.body.Categ === 'soc-sci-categ') {
-        category = "Social Science";
-    }
-    else if (req.body.Categ === 'math-categ') {
-        category = "Mathematics";
-    }
-
-    else if (req.body.Categ === 'phys-sci-categ') {
-        category = "Physical Science";
-    }
-
-    if (req.body.Categ === 'all-categ') {
+    if (searchVal.length === 0) {
+        if (req.params.category === "all") {
         
-        try {
-            PdfDetailsSchema.find({ title: {$regex: req.body.Search, $options: 'i' }})
-            .then((data) => {
-                
-                res.send(data);
-            })
-
-        } catch (error) {
-            res.send(error);
+            try {
+                PdfDetailsSchema.find({ title: {$regex: req.query.search, $options: 'i' }})
+                .then((data) => {
+                    
+                    res.status(200).send(data);
+                })
+    
+            } catch (error) {
+                res.status(400).send(error);
+            }
+        }
+        else{
+            try {
+                PdfDetailsSchema.find({ title: {$regex: req.query.search, $options: 'i' },
+            category: req.params.category})
+                .then((data) => {
+                    
+                    res.status(200).send(data);
+                })
+    
+            } catch (error) {
+                res.status(400).send(error);
+            }
         }
     }
+
     else{
-        try {
-            PdfDetailsSchema.find({ title: {$regex: req.body.Search, $options: 'i' },
-        category: category})
-            .then((data) => {
-                
-                res.send(data);
-            })
-
-        } catch (error) {
-            res.send(error);
+        if (req.params.category != "all") {
+            try {
+                PdfDetailsSchema.find({category: req.params.category}).then((data) => {
+                    res.status(200).send(data);
+                });
+        
+            } catch (error) {
+                res.status(400).send();
+            } 
+        }
+        else
+        {
+            try {
+                PdfDetailsSchema.find({}).then((data) => {
+                    res.status(200).send(data);
+                });
+        
+            } catch (error) {
+                res.status(400).send();
+            } 
         }
     }
-})
+ })
 
 router.post('/delete-pdf', (req, res) => {
     const action = "Delete PDF" 
@@ -190,9 +116,18 @@ router.post('/edit-pdf', async (req, res) => {
     const author = req.body.data.author;
     const category = req.body.data.category;
     const year = req.body.data.year;
+    const currentYear = new Date().getFullYear();
     var isTrue = true;
     const action = "Edit PDF Detail/s" 
     const date = Date.now()
+
+    if (!/^\d{4}$/.test(year) || year > currentYear || year === "") {
+        return res.status(400).json({ status: "Invalid year! Please provide a valid 4-digit year not greater than the current year." });
+    }
+
+    if (title.trim() === "") {
+        return res.status(400).json({ status: "Invalid title! Please provide a non-empty title." });
+    }
 
     const matchedTitles = await PdfDetailsSchema.find({title: title});
     if (matchedTitles.length > 0){

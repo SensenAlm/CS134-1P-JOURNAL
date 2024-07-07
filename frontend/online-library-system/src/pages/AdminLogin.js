@@ -77,7 +77,7 @@ export default function AdminLogin() {
                     <div class="elements tw-p-2.5 tw-w-full tw-font-roboto">
                         <button type="submit" class="lgnbutton tw-flex tw-justify-center tw-items-center tw-w-full tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500"
                             >
-                            <label class="tw-cursor-pointer tw-text-gray-50">Sign In</label></button>
+                            <label class="tw-cursor-pointer tw-text-gray-50">Login</label></button>
                     </div>
                 </form>
             </div>

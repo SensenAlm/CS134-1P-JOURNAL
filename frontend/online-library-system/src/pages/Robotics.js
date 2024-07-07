@@ -22,7 +22,7 @@ export default function Robotics() {
                 
                 <div class="md:tw-w-[80%] sm:tw-w-full sm:tw-px-8 md:tw-bg-white tw-p-6 tw-rounded-lg md:tw-shadow-md tw-bg-opacity-[80%]">
                     <Searchbar search={handleSearch}/>
-                    <Category search={searchVal} category={"robotics-categ"} />   
+                    <Category search={searchVal} category={"Robotics"} />   
                 </div>
             </div>
         </div>  

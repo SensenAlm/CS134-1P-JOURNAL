@@ -110,43 +110,61 @@ router.post("/getToken", async (req, res) => {
 router.post("/authorizeUser", async(req, res) => {
     const token = req.body.token.split("\"")[1];
 
-    const decode = jwt.verify(token, "Secret");
 
-    const id = decode._id;
-    try {
-        const student = await regStudentsSchema.findById(id)
+    jwt.verify(token, "Secret", async function(err, decode) {
+        if (err) {
+            res.status(403).send({status: "Expired"});
+        }
+        
+        else {
+            try {
+                const student = await regStudentsSchema.findById(decode._id)
+        
+                if (student) {
+                    res.json({status: "Student"});
+                }
+                else{
+                    res.json({status: "Error"});
+                }
+            } catch (error) {
+                res.json({status: "Error"})
+            }
+       }
 
-        if (student) {
-            res.json({status: "Student"});
-        }
-        else{
-            res.json({status: "Error"});
-        }
-    } catch (error) {
-        res.json({status: "Error"})
-    }
+    });
+
+    
+    
     
 })
 
 
 router.post("/authorizeAdmin", async(req, res) => {
-
+    
     const token = req.body.token.split("\"")[1];
 
-    const decode = jwt.verify(token, "Secret")
+    jwt.verify(token, "Secret", async function(err, decode) {
+        if (err) {
+            res.status(403).send({status: "Expired"});
+        }
+
+        else {
+            try {
+                const admin = await adminSchema.findById(decode._id)
+                if (admin) {
+                    res.json({status: "Admin"});
+                }
+                else{
+                    res.json({status: "Error"});
+                }
+            } catch (error) {
+                res.json({status: "Error"});
+            }
+       }
+
+    });
    
-    const id = decode._id;
-    try {
-        const admin = await adminSchema.findById(id)
-        if (admin) {
-            res.json({status: "Admin"});
-        }
-        else{
-            res.json({status: "Error"});
-        }
-    } catch (error) {
-        res.json({status: "Error"})
-    }
+    
 
 })
 

@@ -22,12 +22,13 @@ module.exports = {
 
       colors: {
         'dark-blue': '#002366',
-        'leaf-green': '#137c1e',
-        'hover-green': '#199926',
+        'steel-blue': '#88acd4',
+        'hover-blue': '#668AB9',
         'green': '#20B02E',
         'dark-green': '#11811E',
-        'src-yellow': '#FFD500',
-        'hover-yellow': '#E9C200',
+        'light-steel': '#063081',
+        'btn-blue': '#8ea9c1',
+        'text-blue': '#1C4264',
         'btn-landing': '#619644',
         'btn-dark': '#4F7739',
       }

@@ -102,7 +102,7 @@ export default function OTPModal({ otp, token, visible, onClose }) {
 
     const verifyOTP = () => {
         if (userInput === otp) {
-            localStorage.setItem("token", JSON.stringify(token));
+            localStorage.setItem("admin", JSON.stringify(token));
             navigate("/admin-dashboard");
             window.location.reload();
         } else {

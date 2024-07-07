@@ -7,7 +7,7 @@ const AuthorizeUser = () => {
     
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("student");
         if (token)
         {
 
@@ -21,7 +21,10 @@ const AuthorizeUser = () => {
             })  
             .then(res => res.json())
             .then(data => {
-                if (data.status === "Student"){
+                if (data.status === "Expired") {
+                    Delete("student");
+                }
+                else if (data.status === "Student"){
                     setUser(true);
                 }
             })
@@ -37,7 +40,7 @@ const AuthorizeAdmin = () => {
     const [isAdmin, setAdmin] = useState(false);
     
     useEffect(() => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("admin");
 
       if (token) {
 
@@ -50,7 +53,10 @@ const AuthorizeAdmin = () => {
             })  
             .then(res => res.json())
             .then(data => {
-                if (data.status === "Admin"){
+                if (data.status === "Expired") {
+                    Delete("admin");
+                }
+                else if (data.status === "Admin"){
                     setAdmin(true);
                 }
             })
@@ -61,8 +67,8 @@ const AuthorizeAdmin = () => {
     return isAdmin
 }
 
-const Delete = () => {
-    localStorage.removeItem("token");
+const Delete = (name) => {
+    localStorage.removeItem(name);
     return;
 }
 

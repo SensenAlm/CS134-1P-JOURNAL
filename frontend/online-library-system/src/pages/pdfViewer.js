@@ -11,6 +11,17 @@ export default function ViewerPage() {
 
     const { dest }= useParams();
 
+    const PdfViewerComponent = ({ pdfUrl }) => {
+        
+    
+        return (
+            <div className="tw-h-[80vh] tw-overflow-y-scroll">
+                <Worker workerUrl={`https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js`}>
+                    <Viewer fileUrl={pdfUrl} />
+                </Worker>
+            </div>
+        );
+    }
     return (
         <>
         <div class="tw-bg-gray-100 tw-h-max tw-bg-auto tw-min-h-screen tw-z-0">
@@ -23,10 +34,11 @@ export default function ViewerPage() {
                         <h1 class="display-4">Online Archive System</h1>
                     </div>
                 
-                    <div class="tw-h-[90%] tw-w-[70%] sm:tw-w-[100%]">
-                        <Worker workerUrl={`https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js`}>
-                            <Viewer fileUrl={'http://localhost:8081/uploads/' + dest}/>
-                        </Worker>
+                    <div class="tw-h-[90%] tw-w-[50%] sm:tw-w-[100%]">
+                     <PdfViewerComponent pdfUrl={'http://localhost:8081/uploads/' + dest} />
+                    
+
+                        
                     </div>
                 </div>
             </div>

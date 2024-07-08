@@ -1,5 +1,4 @@
 import Header from "../components/navbar"
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Viewer, Worker } from '@react-pdf-viewer/core'

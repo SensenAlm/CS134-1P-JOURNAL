@@ -5,6 +5,7 @@ const pdfRoutes = require('./routes/pdfRoutes');
 const postRoutes = require('./routes/postRoutes');
 const tokenRoute = require('./routes/token');
 const studentRoute = require('./routes/studentRoute');
+const adminRoute = require('./routes/adminRoutes');
 
 app.use(cors());
 app.use(express.json());
@@ -41,6 +42,7 @@ app.use('/', postRoutes);
 app.use('/', pdfRoutes);
 app.use('/', tokenRoute);
 app.use('/', studentRoute);
+app.use('/', adminRoute);
 
 app.listen(8081, ()=> {
     console.log("listening");

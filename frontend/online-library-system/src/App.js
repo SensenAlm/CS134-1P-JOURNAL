@@ -17,6 +17,7 @@ import AccountManagement from './pages/accountManagement';
 // import ManageCategory from './pages/ManageCategory';
 import PDFViewer from './pages/pdfViewer';
 import Status from './pages/studentStatus';
+import AdminDashboard from './pages/AdminDashboard';
 import { AuthorizeAdmin, AuthorizeUser } from "./hooks/authorize";
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
     <div className='App'>
         
         <Routes>
-          <Route index element={AuthorizeUser() ?<Home/> : <Status/>} /> 
+          <Route index element={AuthorizeUser() ?<Home/> : <AdminDashboard/>} /> 
           <Route path="login" element={AuthorizeUser()? <Home/>: <StudLogin/>} />
           <Route path="register" element={AuthorizeUser()? <Home/> : <Register/>} />
           <Route path="category/all" element={AuthorizeUser() ?<Home/> : <StudLogin/>}/>

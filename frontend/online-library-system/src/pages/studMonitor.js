@@ -7,7 +7,7 @@ import Papa from "papaparse";
 export default function Monitor() {
     const [credData, setCred] = useState([]);
     const [studData, setStud] = useState([]);
-    const url = 'http://localhost:8081';
+    const url = 'https://cs134-1p-journal-oftf.onrender.com';
 
     useEffect(() => {
         // fetch('http://localhost:8081/reg-list')
@@ -49,13 +49,13 @@ export default function Monitor() {
                         },
                         body: JSON.stringify(data),
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.status);
-                    })
-                    .catch((error) => {
-                        alert('Error uploading data');
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(data.status);
+                        })
+                        .catch((error) => {
+                            alert('Error uploading data');
+                        });
                 },
             });
         } else {
@@ -83,7 +83,7 @@ export default function Monitor() {
                 <div className="tw-flex sm:tw-flex-wrap tw-flex-col tw-w-full md:tw-mx-20 md:tw-mt-[100px] sm:tw-m-5 tw-align-top">
                     <label className="tw-text-center tw-text-5xl tw-pb-[100px]">Enrolled Students</label>
                     <div className="tw-flex tw-mb-4 tw-items-center">
-                        <input 
+                        <input
                             className="file:tw-rounded-l-md tw-block file:tw-h-[40px] file:tw-border-none tw-outline-none tw-rounded-md tw-ring-1
                             tw-ring-gray-300 focus:tw-ring-gray-500 file:tw-bg-dark-blue file:tw-px-3 file:tw-text-white
                             focus:tw-ring-1 focus:tw-shadow-lg file:hover:tw-bg-light-steel file:tw-duration-500 file:hover:tw-cursor-pointer"
@@ -91,7 +91,7 @@ export default function Monitor() {
                             accept=".csv"
                             onChange={handleFileUpload}
                         />
-                        <CSVLink 
+                        <CSVLink
                             headers={csvHeaders}
                             data={studData}
                             filename={"students.csv"}

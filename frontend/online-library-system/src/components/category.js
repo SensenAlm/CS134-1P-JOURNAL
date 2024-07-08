@@ -5,25 +5,25 @@ import { Link } from 'react-router-dom';
 
 
 export default function Category({ search, category }) {
-    const url = 'http://localhost:8081';
+    const url = 'https://cs134-1p-journal-oftf.onrender.com';
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentpage] = useState(1);
     const [postsPerPage, setPostsperpage] = useState(5); //Post per page
 
     const [sortingType, setSortingType] = useState(1) //1: Ascending || -1: Descending
-    
-    useEffect(()=>{
-        
+
+    useEffect(() => {
+
         // fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
         fetch(url + '/students/manuscripts' + category + '/?search=' + search, {
-        method: "get",
-        })  
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => console.log(err));
+            method: "get",
+        })
+            .then(res => res.json())
+            .then(data => setData(data))
+            .catch(err => console.log(err));
     }, [search])
-    
+
     const updStat = (pdfdestination, title) => {
 
         console.log(pdfdestination);
@@ -119,7 +119,7 @@ export default function Category({ search, category }) {
                     ))}
                 </tbody>
             </table>
-            
+
             <div class="tw-flex tw-justify-end tw-pt-5">
                 <Pagination postsPerPage={postsPerPage} setPostsPerPage={setPostCount} totalPosts={data.length} paginate={paginate} sortType={sortingType} setSortType={sorting} />
             </div>

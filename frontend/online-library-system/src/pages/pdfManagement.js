@@ -7,7 +7,7 @@ export default function PDFManagement() {
     const [warningVisible, setWarningVisible] = useState(false);
     const [titleFile, setTitleFile] = useState("");
     const [deleteBtnEvent, setDeleteBtnEvent] = useState(null);
-    const url = 'http://localhost:8081';
+    const url = 'https://cs134-1p-journal-oftf.onrender.com';
 
     const [primaryData, setPrimary] = useState([]);
     const [data, setData] = useState([]);
@@ -211,7 +211,7 @@ export default function PDFManagement() {
                                 </tbody>
                             </table>
                         </div>
-                        
+
                     </div>
                 </div>
             </div >

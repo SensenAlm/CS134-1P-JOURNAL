@@ -24,7 +24,7 @@ export default function Admin() {
         console.log(researchTitle, researchAuthor, researchYear, category, file);
 
         // const uploadAPI = await axios.post("http://localhost:8081/upload-pdf", formData, {
-        const uploadAPI = await axios.post("https://rshs1-online-archive-system.onrender.com/upload-pdf", formData, {
+        const uploadAPI = await axios.post("https://online-library-system-api.onrender.com/upload-pdf", formData, {
             headers: { "Content-type" : "multipart/form-data",
         },
             

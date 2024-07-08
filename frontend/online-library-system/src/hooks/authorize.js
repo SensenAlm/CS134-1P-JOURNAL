@@ -12,7 +12,7 @@ const AuthorizeUser = () => {
         {
 
             // fetch('http://localhost:8081/authorizeUser', {  
-            fetch('https://rshs1-online-archive-system.onrender.com/authorizeUser', {  
+            fetch('https://online-library-system-api.onrender.com/authorizeUser', {  
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const AuthorizeAdmin = () => {
       if (token) {
 
         // fetch('http://localhost:8081/authorizeAdmin', {
-        fetch('https://rshs1-online-archive-system.onrender.com/authorizeAdmin', {
+        fetch('https://online-library-system-api.onrender.com/authorizeAdmin', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

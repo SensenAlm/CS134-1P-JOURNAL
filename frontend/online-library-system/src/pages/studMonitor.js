@@ -10,7 +10,7 @@ export default function Monitor() {
 
     useEffect(() => {
         // fetch('http://localhost:8081/reg-list')
-        fetch('https://rshs1-online-archive-system.onrender.com/reg-list')
+        fetch('https://online-library-system-api.onrender.com/reg-list')
             .then(res => res.json())
             .then(credData => setCred(credData))
             .catch(err => console.log(err));
@@ -18,7 +18,7 @@ export default function Monitor() {
 
     useEffect(() => {
         // fetch('http://localhost:8081/student-list')
-        fetch('https://rshs1-online-archive-system.onrender.com/student-list')
+        fetch('https://online-library-system-api.onrender.com/student-list')
             .then(res => res.json())
             .then(studData => setStud(studData))
             .catch(err => console.log(err));
@@ -41,7 +41,7 @@ export default function Monitor() {
                         middlename: row["Middle Name"],
                     }));
 
-                    fetch('http://localhost:8081/upload-students', {
+                    fetch('https://online-library-system-api.onrender.com/upload-students', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export default function Monitor() {
     ];
 
     const auditExport = (e) => {
-        fetch("http://localhost:8081/audit-export")
+        fetch("https://online-library-system-api.onrender.com/audit-export")
     }
 
     return (

@@ -107,7 +107,7 @@ export default function PDFManagement() {
             return;
         }
         // fetch('http://localhost:8081/edit-pdf', {
-        fetch('https://rshs1-online-archive-system.onrender.com/edit-pdf', {
+        fetch('https://online-library-system-api.onrender.com/edit-pdf', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

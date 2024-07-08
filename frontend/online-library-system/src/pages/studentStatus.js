@@ -6,7 +6,8 @@ export default function Status() {
     const [registeredStud, setRegisteredStud] = useState([]);
 
     useEffect(() => {
-      fetch("http://localhost:8081/studentStatus", {
+    //   fetch("http://localhost:8081/studentStatus", {
+        fetch("https://online-library-system-api.onrender.com/studentStatus", {
         method: "get",
         })
       .then(res => res.json())

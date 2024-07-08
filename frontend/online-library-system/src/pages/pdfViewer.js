@@ -36,7 +36,7 @@ export default function ViewerPage() {
                 
                     <div class="tw-h-[90%] tw-w-[50%] sm:tw-w-[100%]">
                         {/* <PdfViewerComponent pdfUrl={'http://localhost:8081/uploads/' + dest} /> */}
-                        <PdfViewerComponent pdfUrl={'https://rshs1-online-archive-system.onrender.com/uploads/' + dest} />
+                        <PdfViewerComponent pdfUrl={'https://online-library-system-api.onrender.com/uploads/' + dest} />
                     </div>
                 </div>
             </div>

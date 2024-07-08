@@ -10,7 +10,7 @@ export default function AccountManagement() {
 
   useEffect(() => {
     // fetch('http://localhost:8081/getCredentials', {
-      fetch('https://rshs1-online-archive-system.onrender.com/getCredentials', {
+      fetch('https://online-library-system-api.onrender.com/getCredentials', {
         method: "get",
         })  
         .then(res => res.json())
@@ -41,7 +41,8 @@ export default function AccountManagement() {
   const deleteButton = (e, id) => {
     e.preventDefault();
     console.log(id);
-    fetch('http://localhost:8081/deleteCredentials', {
+    // fetch('http://localhost:8081/deleteCredentials', {
+    fetch('https://online-library-system-api.onrender.com/deleteCredentials', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +75,8 @@ export default function AccountManagement() {
       editButton(d);
     }
     else {
-      fetch('http://localhost:8081/editCredentials', {
+      // fetch('http://localhost:8081/editCredentials', {
+        fetch('https://online-library-system-api.onrender.com/editCredentials', {
             
         method: "POST",
         headers: {

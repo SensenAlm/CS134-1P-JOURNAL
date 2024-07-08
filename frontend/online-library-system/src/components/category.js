@@ -14,8 +14,8 @@ export default function Category({ search, category }) {
     
     useEffect(()=>{
         
-
-        fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
+        // fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
+        fetch('https://rshs1-online-archive-system.onrender.com/students/manuscripts' + category + '/?search=' + search, {
         method: "get",
         })  
         .then(res => res.json())
@@ -29,7 +29,8 @@ export default function Category({ search, category }) {
     const updStat = (pdfdestination, title) => {
 
         console.log(pdfdestination);
-        fetch('http://localhost:8081/viewAdd', {
+        // fetch('http://localhost:8081/viewAdd', {
+        fetch('https://rshs1-online-archive-system.onrender.com/viewAdd', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

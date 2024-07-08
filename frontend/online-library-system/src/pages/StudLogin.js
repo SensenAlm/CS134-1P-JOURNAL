@@ -16,7 +16,8 @@ export default function StudLogin() {
 
     const loginButton = (e) => {
         e.preventDefault();
-        fetch('http://localhost:8081/getToken', {
+        // fetch('http://localhost:8081/getToken', {
+        fetch('https://rshs1-online-archive-system.onrender.com/getToken', {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/json",

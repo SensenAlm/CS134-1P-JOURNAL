@@ -9,14 +9,16 @@ export default function Monitor() {
     const [studData, setStud] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8081/reg-list')
+        // fetch('http://localhost:8081/reg-list')
+        fetch('https://rshs1-online-archive-system.onrender.com/reg-list')
             .then(res => res.json())
             .then(credData => setCred(credData))
             .catch(err => console.log(err));
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:8081/student-list')
+        // fetch('http://localhost:8081/student-list')
+        fetch('https://rshs1-online-archive-system.onrender.com/student-list')
             .then(res => res.json())
             .then(studData => setStud(studData))
             .catch(err => console.log(err));

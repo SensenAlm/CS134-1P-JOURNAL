@@ -9,7 +9,8 @@ export default function AccountManagement() {
   const [searchVal, setSearch] = useState("");
 
   useEffect(() => {
-    fetch('http://localhost:8081/getCredentials', {
+    // fetch('http://localhost:8081/getCredentials', {
+      fetch('https://rshs1-online-archive-system.onrender.com/getCredentials', {
         method: "get",
         })  
         .then(res => res.json())

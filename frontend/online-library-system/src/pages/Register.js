@@ -20,7 +20,8 @@ export default function Register() {
 
             console.log(studentLrn, studentPass);
             
-            const uploadAPI = await axios.post("http://localhost:8081/register-stud", formData, {
+            // const uploadAPI = await axios.post("http://localhost:8081/register-stud", formData, {
+            const uploadAPI = await axios.post("https://rshs1-online-archive-system.onrender.com/register-stud", formData, {
                 headers: {
                     "Content-Type" : "multipart/form-data",
                 }

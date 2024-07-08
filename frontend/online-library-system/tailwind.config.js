@@ -22,15 +22,15 @@ module.exports = {
 
       colors: {
         'dark-blue': '#002366',
-        'steel-blue': '#88acd4',
-        'hover-blue': '#668AB9',
+        'leaf-green': '#137c1e',
+        'hover-green': '#199926',
         'green': '#20B02E',
         'dark-green': '#11811E',
-        'light-steel': '#063081',
-        'btn-blue': '#8ea9c1',
-        'text-blue': '#1C4264',
+        'src-yellow': '#FFD500',
+        'hover-yellow': '#E9C200',
         'btn-landing': '#619644',
         'btn-dark': '#4F7739',
+        'light-steel': '#063081',
       }
     },
   },

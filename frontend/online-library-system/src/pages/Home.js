@@ -19,7 +19,7 @@ export default function Home() {
 
             <div class="tw-flex tw-flex-col tw-items-center tw-w-full tw-gap-x-20">
                 <div class="tw-flex tw-flex-col tw-items-center tw-w-full tw-pb-5">
-                    <div class="jumbotron jumbotron-fluid tw-pt-[150px] tw-pb-[80px] tw-text-center">
+                    <div class="jumbotron jumbotron-fluid tw-my-[100px] tw-text-center">
                         <h1 class="display-4">Online Archive System</h1>
                         <p class="lead">For the students of Regional Science High School Region 1</p>
                     </div>

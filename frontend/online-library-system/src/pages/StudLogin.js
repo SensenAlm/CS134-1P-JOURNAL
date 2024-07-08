@@ -7,9 +7,8 @@ export default function StudLogin() {
     const navigate = useNavigate();
     const [lrn, setLrn] = useState();
     const [password, setPassword] = useState();
-
+    const url = 'http://localhost:8081';
     
-
     const navToSignUp = () => {
         navigate('/register');
     }
@@ -17,7 +16,7 @@ export default function StudLogin() {
     const loginButton = (e) => {
         e.preventDefault();
         // fetch('http://localhost:8081/getToken', {
-        fetch('https://online-library-system-api.onrender.com/getToken', {
+        fetch(url + '/getToken', {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/json",

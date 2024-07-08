@@ -10,11 +10,12 @@ export default function AdminLogin() {
     const [password, setPass] = useState();
     const [otp, setOTP] = useState();
     const [token, setToken] = useState();
+    const url = 'http://localhost:8081';
 
     const login = (e) => {
         e.preventDefault();
         // fetch('http://localhost:8081/getToken', {
-        fetch('https://online-library-system-api.onrender.com/getToken', {
+        fetch(url + '/getToken', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -1,10 +1,8 @@
 const { useEffect, useState } = require("react")
 
-
-
 const AuthorizeUser = () => {
     const [isUser, setUser] = useState(false);
-    
+    const url = 'http://localhost:8081';
 
     useEffect(() => {
         const token = localStorage.getItem("student");
@@ -12,7 +10,7 @@ const AuthorizeUser = () => {
         {
 
             // fetch('http://localhost:8081/authorizeUser', {  
-            fetch('https://online-library-system-api.onrender.com/authorizeUser', {  
+            fetch(url + '/authorizeUser', {  
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,6 +37,7 @@ const AuthorizeUser = () => {
 
 const AuthorizeAdmin = () => {
     const [isAdmin, setAdmin] = useState(false);
+    const url = 'http://localhost:8081';
     
     useEffect(() => {
       const token = localStorage.getItem("admin");
@@ -46,7 +45,7 @@ const AuthorizeAdmin = () => {
       if (token) {
 
         // fetch('http://localhost:8081/authorizeAdmin', {
-        fetch('https://online-library-system-api.onrender.com/authorizeAdmin', {
+        fetch(url + '/authorizeAdmin', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 export default function Category({ search, category }) {
+    const url = 'http://localhost:8081';
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentpage] = useState(1);
@@ -15,7 +16,7 @@ export default function Category({ search, category }) {
     useEffect(()=>{
         
         // fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
-        fetch('https://online-library-system-api.onrender.com/students/manuscripts' + category + '/?search=' + search, {
+        fetch(url + '/students/manuscripts' + category + '/?search=' + search, {
         method: "get",
         })  
         .then(res => res.json())
@@ -23,14 +24,11 @@ export default function Category({ search, category }) {
         .catch(err => console.log(err));
     }, [search])
     
-
-    
-
     const updStat = (pdfdestination, title) => {
 
         console.log(pdfdestination);
         // fetch('http://localhost:8081/viewAdd', {
-        fetch('https://online-library-system-api.onrender.com/viewAdd', {
+        fetch(url + '/viewAdd', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -7,10 +7,11 @@ import Papa from "papaparse";
 export default function Monitor() {
     const [credData, setCred] = useState([]);
     const [studData, setStud] = useState([]);
+    const url = 'http://localhost:8081';
 
     useEffect(() => {
         // fetch('http://localhost:8081/reg-list')
-        fetch('https://online-library-system-api.onrender.com/reg-list')
+        fetch(url + '/reg-list')
             .then(res => res.json())
             .then(credData => setCred(credData))
             .catch(err => console.log(err));
@@ -18,7 +19,7 @@ export default function Monitor() {
 
     useEffect(() => {
         // fetch('http://localhost:8081/student-list')
-        fetch('https://online-library-system-api.onrender.com/student-list')
+        fetch(url + '/student-list')
             .then(res => res.json())
             .then(studData => setStud(studData))
             .catch(err => console.log(err));
@@ -41,7 +42,7 @@ export default function Monitor() {
                         middlename: row["Middle Name"],
                     }));
 
-                    fetch('https://online-library-system-api.onrender.com/upload-students', {
+                    fetch(url + '/upload-students', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export default function Monitor() {
     ];
 
     const auditExport = (e) => {
-        fetch("https://online-library-system-api.onrender.com/audit-export")
+        fetch(url + "/audit-export")
     }
 
     return (

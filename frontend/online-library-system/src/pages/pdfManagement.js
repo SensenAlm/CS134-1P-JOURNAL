@@ -7,6 +7,7 @@ export default function PDFManagement() {
     const [warningVisible, setWarningVisible] = useState(false);
     const [titleFile, setTitleFile] = useState("");
     const [deleteBtnEvent, setDeleteBtnEvent] = useState(null);
+    const url = 'http://localhost:8081';
 
     const [primaryData, setPrimary] = useState([]);
     const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ export default function PDFManagement() {
     useEffect(() => {
 
         // fetch('http://localhost:8081/all-categ', {
-        fetch('https://rshs1-online-archive-system.onrender.com/all-categ', {
+        fetch(url + '/all-categ', {
             method: "get",
             headers: {
                 "ngrok-skip-browser-warning": "89420",
@@ -37,7 +38,7 @@ export default function PDFManagement() {
 
     useEffect(() => {
         // fetch('http://localhost:8081/pdf-statistics', {
-        fetch('https://rshs1-online-archive-system.onrender.com/pdf-statistics', {
+        fetch(url + '/pdf-statistics', {
             method: "get",
         })
             .then(res => res.json())
@@ -65,7 +66,7 @@ export default function PDFManagement() {
     const deleteButton = (e, title) => {
         e.preventDefault();
         // fetch('http://localhost:8081/delete-pdf', {
-        fetch('https://rshs1-online-archive-system.onrender.com/delete-pdf', {
+        fetch(url + '/delete-pdf', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -107,7 +108,7 @@ export default function PDFManagement() {
             return;
         }
         // fetch('http://localhost:8081/edit-pdf', {
-        fetch('https://online-library-system-api.onrender.com/edit-pdf', {
+        fetch(url + '/edit-pdf', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -137,77 +138,80 @@ export default function PDFManagement() {
                     <Sidebar />
                 </div>
 
-                <div class="tw-flex md:tw-mx-20 md:tw-mt-[100px] sm:tw-m-5 tw-align-top tw-flex-col">
-                    <div>
-                        <Searchbar />
-                    </div>
+                <div class="tw-flex md:tw-mx-20 md:tw-mt-[100px] sm:tw-m-5 tw-align-top tw-flex-col tw-w-full">
+                    <label className="tw-text-center tw-text-5xl tw-my-[70px]">PDF Management</label>
 
-                    <div class="table-striped table-responsive md:tw-w-full sm:tw-w-full tw-flex tw-items-center tw-flex-col">
-                        <table class="table table-striped tw-text-center">
-                            <thead class="tw-text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Author</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Year Published</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
+                    <div class="table-striped table-responsive md:tw-w-full sm:tw-w-full tw-flex tw-items-center">
+                        <div class="tw-flex-col">
+                            <Searchbar />
 
-                            <tbody>
-                                {data.map((d, i) => (
-
-                                    <tr key={i}>
-                                        <th scope="row">{i + 1}</th>
-                                        <td class="tw-break-words tw-text-left tw-text-wrap tw-pl-4 tw-pr-3 tw-text-gray-900 sm:tw-pl-6 sm:tw-pt-4">{d.state
-                                            ? <input value={d.title} name="title" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
-                                            : <>{d.title}</>}</td>
-                                        <td>{d.state
-                                            ? <input value={d.author} name="author" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
-                                            : <>{d.author}</>}</td>
-                                        <td>{d.state
-                                            ? <select name="category" value={d.category} onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent">
-                                                <option value="Mathematics">Mathematics</option>
-                                                <option value="Life Science">Life Science</option>
-                                                <option value="Robotics">Robotics</option>
-                                                <option value="Social Science">Social Science</option>
-                                                <option value="Physical Science">Physical Science</option>
-                                            </select>
-                                            : <>{d.category}</>}</td>
-                                        <td>{d.state
-                                            ? <input value={d.year} name="year" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-p-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
-                                            : <>{d.year}</>}</td>
-                                        <td class="tw-w-[30px]">{d.state
-                                            ? <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
-                                                onClick={(e) => { d.state = false; doneButton(e, d) }}>
-                                                <label class="tw-cursor-pointer tw-text-gray-100">Done</label></button>
-                                            : <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
-                                                onClick={() => { d.state = true; editButton(d) }}>
-                                                <label class="tw-cursor-pointer tw-text-gray-100">Edit</label></button>
-                                        }</td>
-                                        <td class="tw-w-[30px]">
-                                            <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
-                                                onClick={
-                                                    // (e) => deleteButton(e, d.title)
-                                                    (e) => {
-                                                        openDeleteWarningModal()
-                                                        setTitleFile(d.title);
-                                                        setDeleteBtnEvent(e);
-                                                    }
-                                                }>
-                                                <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
-                                        </td>
+                            <table class="table table-striped tw-text-center">
+                                <thead class="tw-text-center">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Author</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Year Published</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
+                                </thead>
 
-                                ))}
-                            </tbody>
-                        </table>
+                                <tbody>
+                                    {data.map((d, i) => (
+
+                                        <tr key={i}>
+                                            <th scope="row">{i + 1}</th>
+                                            <td class="tw-break-words tw-text-left tw-text-wrap tw-pl-4 tw-pr-3 tw-text-gray-900 sm:tw-pl-6 sm:tw-pt-4">{d.state
+                                                ? <input value={d.title} name="title" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                                : <>{d.title}</>}</td>
+                                            <td>{d.state
+                                                ? <input value={d.author} name="author" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                                : <>{d.author}</>}</td>
+                                            <td>{d.state
+                                                ? <select name="category" value={d.category} onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent">
+                                                    <option value="Mathematics">Mathematics</option>
+                                                    <option value="Life Science">Life Science</option>
+                                                    <option value="Robotics">Robotics</option>
+                                                    <option value="Social Science">Social Science</option>
+                                                    <option value="Physical Science">Physical Science</option>
+                                                </select>
+                                                : <>{d.category}</>}</td>
+                                            <td>{d.state
+                                                ? <input value={d.year} name="year" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-p-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                                : <>{d.year}</>}</td>
+                                            <td class="tw-w-[30px]">{d.state
+                                                ? <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
+                                                    onClick={(e) => { d.state = false; doneButton(e, d) }}>
+                                                    <label class="tw-cursor-pointer tw-text-gray-100">Done</label></button>
+                                                : <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
+                                                    onClick={() => { d.state = true; editButton(d) }}>
+                                                    <label class="tw-cursor-pointer tw-text-gray-100">Edit</label></button>
+                                            }</td>
+                                            <td class="tw-w-[30px]">
+                                                <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
+                                                    onClick={
+                                                        // (e) => deleteButton(e, d.title)
+                                                        (e) => {
+                                                            openDeleteWarningModal()
+                                                            setTitleFile(d.title);
+                                                            setDeleteBtnEvent(e);
+                                                        }
+                                                    }>
+                                                    <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
+                                            </td>
+                                        </tr>
+
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
                 </div>
             </div >

@@ -4,10 +4,11 @@ export default function Status() {
 
     const [enrolledStud, setEnrolledStud] = useState([]);
     const [registeredStud, setRegisteredStud] = useState([]);
+    const url = 'http://localhost:8081';
 
     useEffect(() => {
     //   fetch("http://localhost:8081/studentStatus", {
-        fetch("https://online-library-system-api.onrender.com/studentStatus", {
+        fetch(url + "/studentStatus", {
         method: "get",
         })
       .then(res => res.json())
@@ -19,8 +20,6 @@ export default function Status() {
       .catch(err => console.log(err));
     }, [])
 
-
-    
     const statusList = enrolledStud.map((d) => {
         const isRegistered = registeredStud.find((x) => x.lrn === d.lrn);
         return { ...d,

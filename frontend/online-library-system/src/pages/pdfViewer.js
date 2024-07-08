@@ -10,6 +10,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 export default function ViewerPage() {
 
     const { dest }= useParams();
+    const url = 'http://localhost:8081';
 
     const PdfViewerComponent = ({ pdfUrl }) => {
         
@@ -36,7 +37,7 @@ export default function ViewerPage() {
                 
                     <div class="tw-h-[90%] tw-w-[50%] sm:tw-w-[100%]">
                         {/* <PdfViewerComponent pdfUrl={'http://localhost:8081/uploads/' + dest} /> */}
-                        <PdfViewerComponent pdfUrl={'https://online-library-system-api.onrender.com/uploads/' + dest} />
+                        <PdfViewerComponent pdfUrl={url + '/uploads/' + dest} />
                     </div>
                 </div>
             </div>

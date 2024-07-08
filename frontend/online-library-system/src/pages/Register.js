@@ -9,6 +9,7 @@ export default function Register() {
     const [studentPass, setPassword] = useState("");
     const [confirmPass, checkPassword] = useState("");
     const navigate = useNavigate();
+    const url = 'http://localhost:8081';
 
     const submitRegForm= async(e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ export default function Register() {
             console.log(studentLrn, studentPass);
             
             // const uploadAPI = await axios.post("http://localhost:8081/register-stud", formData, {
-            const uploadAPI = await axios.post("https://online-library-system-api.onrender.com/register-stud", formData, {
+            const uploadAPI = await axios.post(url + "/register-stud", formData, {
                 headers: {
                     "Content-Type" : "multipart/form-data",
                 }

@@ -4,7 +4,7 @@ import Pagination from "./Pagination";
 import { Link } from 'react-router-dom';
 
 
-export default function Category({ search, category }) {
+export default function Category({ search }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentpage] = useState(1);
@@ -15,7 +15,7 @@ export default function Category({ search, category }) {
     useEffect(()=>{
         
 
-        fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
+        fetch('http://localhost:8081/students/manuscripts/?search=' + search, {
         method: "get",
         })  
         .then(res => res.json())
@@ -23,7 +23,6 @@ export default function Category({ search, category }) {
         .catch(err => console.log(err));
     }, [search])
     
-
     
 
     const updStat = (pdfdestination, title) => {
@@ -76,9 +75,7 @@ export default function Category({ search, category }) {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPost = data
-        .sort((a, b) => {
-            return sortingType * a.title.localeCompare(b.title)
-        })
+        
         .slice(indexOfFirstPost, indexOfLastPost);
 
     //Change page

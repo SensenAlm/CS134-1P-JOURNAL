@@ -8,6 +8,7 @@ export default function Searchbar( {search} ) {
         
         e.preventDefault();
         search(value);
+        console.log(value);
     }
 
     return (

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const PdfSchema = new Schema({
   title: String, // String is shorthand for {type: String}
   author: String,
-  year: Number,
+  year: String,
   category: String,
   comments: String,
   destination: String,

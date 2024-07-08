@@ -17,98 +17,134 @@ const pdfStatistics = mongoose.model("pdfstat");
 require("../Schema/auditLogs");
 const auditSchema = mongoose.model("auditLog");
 
-router.get('/all-categ', (req, res)=> {
-    try {
-         PdfDetailsSchema.find({}).then((data) => {
-             res.send(data);
-         });
- 
-    } catch (error) {
-         res.send()
-    } 
-    
- })
 
- router.get('/students/manuscripts/:category?/', (req, res) => {
-    const searchVal = req.query.search ? req.query.search.split(" ") : [];
+ router.get('/students/manuscripts/?', (req, res) => {
     
 
-    if (searchVal.length === 0) {
-        if (req.params.category === "all") {
-        
-            try {
-                PdfDetailsSchema.find({ title: {$regex: req.query.search, $options: 'i' }})
-                .then((data) => {
-                    
-                    res.status(200).send(data);
-                })
-    
-            } catch (error) {
-                res.status(400).send(error);
-            }
-        }
-        else{
-            try {
-                PdfDetailsSchema.find({ title: {$regex: req.query.search, $options: 'i' },
-            category: req.params.category})
-                .then((data) => {
-                    
-                    res.status(200).send(data);
-                })
-    
-            } catch (error) {
-                res.status(400).send(error);
-            }
-        }
+    if (req.query.search === "") {
+        console.log("heelo");
+        PdfDetailsSchema.find({}).then((data)=> {
+            res.status(200).send(data);
+        })
     }
-
-    else{
-        if (req.params.category != "all") {
-            try {
-                PdfDetailsSchema.find({category: req.params.category}).then((data) => {
-                    res.status(200).send(data);
-                });
-        
-            } catch (error) {
-                res.status(400).send();
-            } 
-        }
-        else
+    else {
+        PdfDetailsSchema.aggregate([
         {
-            try {
-                PdfDetailsSchema.find({}).then((data) => {
-                    res.status(200).send(data);
-                });
-        
-            } catch (error) {
-                res.status(400).send();
-            } 
+            $search: {
+                index: "SearchManuscripts",
+                text: {
+                    
+                    path: ["title", "year", "category", "author"],
+                    query: req.query.search,
+                    fuzzy: {}, 
+                },
+                sort: {score: {$meta: "searchScore"}}
+            },
+        },
+        {
+            $project: {
+                _id: 1,
+                title: 1,
+                author: 1,
+                category: 1,
+                year: 1,
+                destination: 1,
+                score: {$meta: "searchScore"}
+                
+            }   
         }
+        ]).then((data) => {
+            res.status(200).send(data);
+        })
     }
- })
-
-router.post('/delete-pdf', (req, res) => {
-    const action = "Delete PDF" 
-    const date = Date.now()
-
-    PdfDetailsSchema.deleteOne({title: req.body.title})
-    .then(result => {
-        pdfStatistics.deleteOne({title: req.body.title})
-        .then(result => {
-            res.send({status: req.body.title+" Deleted"});
-        })
-        .catch(error => {
-            res.send(error);
-        })
-        
-        auditSchema.create({
-            action: action,
-            date: date})
-    })
-    .catch(error => {
-        res.send(error);
-    })
 })
+     
+
+        
+        // {
+        //   $project: {
+        //     "_id": 0,
+        //     "title": 1,
+        //     score: { $meta: "searchScore" }
+        //   }
+        // }
+      
+//     if (searchVal.length === 0) {
+//         if (req.params.category === "all") {
+        
+//             try {
+//                 PdfDetailsSchema.find({ title: {$regex: req.query.search, $options: 'i' }})
+//                 .then((data) => {
+                    
+//                     res.status(200).send(data);
+//                 })
+    
+//             } catch (error) {
+//                 res.status(400).send(error);
+//             }
+//         }
+//         else{
+//             try {
+//                 PdfDetailsSchema.find({ title: {$regex: req.query.search, $options: 'i' },
+//             category: req.params.category})
+//                 .then((data) => {
+                    
+//                     res.status(200).send(data);
+//                 })
+    
+//             } catch (error) {
+//                 res.status(400).send(error);
+//             }
+//         }
+//     }
+
+//     else{
+//         if (req.params.category != "all") {
+//             try {
+//                 PdfDetailsSchema.find({category: req.params.category}).then((data) => {
+//                     res.status(200).send(data);
+//                 });
+        
+//             } catch (error) {
+//                 res.status(400).send();
+//             } 
+//         }
+//         else
+//         {
+//             try {
+//                 PdfDetailsSchema.find({}).then((data) => {
+//                     res.status(200).send(data);
+//                 });
+        
+//             } catch (error) {
+//                 res.status(400).send();
+//             } 
+//         }
+//     }
+//  })
+
+// router.post('/delete-pdf', (req, res) => {
+//     const action = "Delete PDF" 
+//     const date = Date.now()
+
+//     PdfDetailsSchema.deleteOne({title: req.body.title})
+//     .then(result => {
+//         pdfStatistics.deleteOne({title: req.body.title})
+//         .then(result => {
+//             res.send({status: req.body.title+" Deleted"});
+//         })
+//         .catch(error => {
+//             res.send(error);
+//         })
+        
+//         auditSchema.create({
+//             action: action,
+//             date: date})
+//     })
+//     .catch(error => {
+//         res.send(error);
+//     })
+
 
 router.post('/edit-pdf', async (req, res) => {
     const id = req.body.data._id;

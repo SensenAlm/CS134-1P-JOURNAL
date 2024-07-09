@@ -71,7 +71,7 @@ router.post("/upload-pdf", upload.single("File"), async (req, res) => {
                 await PdfDetailsSchema.create({
                     title: title,
                     author: author,
-                    year: year,
+                    year: year.ToString(),
                     category: category,
                     destination: fileDest
                 })

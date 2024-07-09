@@ -1,6 +1,7 @@
 import Header from "../components/navbar"
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Viewer, Worker } from '@react-pdf-viewer/core'
 
@@ -10,7 +11,12 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 export default function ViewerPage() {
 
     const { dest }= useParams();
+    const navigate = useNavigate();
     const url = 'http://localhost:8081';
+
+    const navToHome = () => {
+        navigate('/');
+    }
 
     const PdfViewerComponent = ({ pdfUrl }) => {
         
@@ -42,6 +48,11 @@ export default function ViewerPage() {
                 </div>
             </div>
 
+            <div class="sm:tw-hidden tw-relative tw-w-full tw-bg-red-100 tw-pr-[300px]">
+                <button class="tw-absolute tw-bottom-6 tw-right-[60px] tw-w-[150px] tw-h-[55px] tw-bg-leaf-green tw-rounded-md tw-px-4 tw-border-none 
+                tw-outline-none hover:tw-bg-hover-green tw-duration-500 tw-text-gray-50" 
+                onClick={navToHome}>Return to Home Page</button>
+            </div>
         </div>
         </>
     )

@@ -168,8 +168,8 @@ export default function PDFManagement() {
                                                     focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
                                                 : <>{d.title}</>}</td>
                                             <td>{d.state
-                                                ? <input value={d.author} name="author" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                                ? <textarea type="text" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[100px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent" />
                                                 : <>{d.author}</>}</td>
                                             <td>{d.state
                                                 ? <select name="category" value={d.category} onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg

@@ -8,7 +8,7 @@ export default function Category({ search, category }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentpage] = useState(1);
-    const [postsPerPage, setPostsperpage] = useState(5); //Post per page
+    const [postsPerPage, setPostsperpage] = useState(10); //Post per page
 
     const [sortingType, setSortingType] = useState(1) //1: Ascending || -1: Descending
     

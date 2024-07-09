@@ -20,9 +20,9 @@ const auditSchema = mongoose.model("auditLog");
 
  router.get('/students/manuscripts/?', (req, res) => {
     
-
+    console.log(req.query.search);
     if (req.query.search === "") {
-        console.log("heelo");
+        
         PdfDetailsSchema.find({}).then((data)=> {
             res.status(200).send(data);
         })

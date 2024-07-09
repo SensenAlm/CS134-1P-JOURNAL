@@ -29,10 +29,9 @@ const Pagination = ({ postsPerPage, setPostsPerPage, totalPosts, paginate, sortT
             <ul class="pagination">
                 {/* <button onClick={() => setSortType(sortType * -1)}>Sorting</button> */}
                 <select type='number' onChange={change} class="tw-rounded-l-md tw-w-full tw-h-[36px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-1 focus:tw-shadow-lg focus:tw-duration-500 tw-mt-[1px] tw-p-[1px]">
-                    <option value='5'>5</option>
                     <option value='10'>10</option>
-                    <option value='15'>15</option>
-                    <option value='100'>100</option>
+                    <option value='25'>25</option>
+                    <option value='50'>50</option>
                 </select>
                 {pageNumbers.map(number => (
                     <li key={number} class="page-item">

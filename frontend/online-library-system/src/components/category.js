@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Category({ search }) {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+   
     const [currentPage, setCurrentpage] = useState(1);
     const [postsPerPage, setPostsperpage] = useState(5); //Post per page
 

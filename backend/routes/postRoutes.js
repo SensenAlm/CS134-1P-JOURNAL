@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const path = require('path');
 
 const mongoose = require("mongoose");
 
@@ -26,7 +27,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now()
-      cb(null, uniqueSuffix + req.body.Title.replace(/[^\w]/gi, '_') +".pdf")
+      cb(null, uniqueSuffix +".pdf")
     }
   })
   
@@ -48,7 +49,8 @@ router.post("/upload-pdf", upload.single("File"), async (req, res) => {
     const action = "Upload PDF" 
     const date = Date.now()
 
-    if (!fileDest || fileDest.mimetype !== 'application/pdf') {
+    if (!fileDest || path.extname(fileDest).toLowerCase() !== '.pdf') {
+        
         return res.json({ status: "Invalid file format! Please upload a PDF file." });
     }
 

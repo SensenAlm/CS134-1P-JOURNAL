@@ -15,14 +15,16 @@ const auditSchema = mongoose.model("auditLog")
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
-    service: 'hotmail',
+    service: "hotmail",
+    host: "smtp.office365.com",
+    port: "587",
     auth: {
-        user: "digital.archive.otp@gmail.com",
+        user: "digital_archive_otp@outlook.com",
         pass: "dihjer-raswaG-6rexvo"
     },
 
     tls: {
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
     }
 
 });

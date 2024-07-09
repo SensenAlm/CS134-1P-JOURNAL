@@ -6,15 +6,12 @@ import { Link } from 'react-router-dom';
 export default function Category({ search, category }) {
     const url = 'http://localhost:8081';
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentpage] = useState(1);
     const [postsPerPage, setPostsperpage] = useState(10); //Post per page
 
-    const [sortingType, setSortingType] = useState(1) //1: Ascending || -1: Descending
-    
     useEffect(()=>{
         
-        console.log(url + '/students/manuscripts' + category + '/?search=' + search)
+        console.log(url + '/students/manuscripts/?search=' + search)
         // fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
         fetch(url + '/students/manuscripts/?search=' + search, {
         method: "get",
@@ -70,20 +67,19 @@ export default function Category({ search, category }) {
     //     .catch(err => console.error(err));
     // }
 
+    
 
     //Get current posts
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPost = data
-        .sort((a, b) => {
-            return sortingType * a.title.localeCompare(b.title)
-        })
+        
         .slice(indexOfFirstPost, indexOfLastPost);
 
     //Change page
     const setPostCount = (postCount) => setPostsperpage(postCount);
     const paginate = (pageNumber) => setCurrentpage(pageNumber);
-    const sorting = (type) => setSortingType(type)
+
 
     return (
         <div class="">
@@ -123,7 +119,7 @@ export default function Category({ search, category }) {
             </table>
             
             <div class="tw-flex tw-justify-end tw-pt-5">
-                <Pagination postsPerPage={postsPerPage} setPostsPerPage={setPostCount} totalPosts={data.length} paginate={paginate} sortType={sortingType} setSortType={sorting} />
+                <Pagination postsPerPage={postsPerPage} setPostsPerPage={setPostCount} totalPosts={data.length} paginate={paginate}  />
             </div>
         </div>
     )

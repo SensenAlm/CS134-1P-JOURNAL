@@ -19,7 +19,7 @@ const auditSchema = mongoose.model("auditLog");
 
 
  router.get('/students/manuscripts/?', (req, res) => {
-    
+
 
     if (req.query.search === "") {
         console.log("heelo");

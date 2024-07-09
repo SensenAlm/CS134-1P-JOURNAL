@@ -18,7 +18,7 @@ export default function PDFManagement() {
     useEffect(() => {
 
         // fetch('http://localhost:8081/all-categ', {
-        fetch(url + '/all-categ', {
+        fetch(url + '/students/manuscripts/?search=', {
             method: "get",
             headers: {
                 "ngrok-skip-browser-warning": "89420",

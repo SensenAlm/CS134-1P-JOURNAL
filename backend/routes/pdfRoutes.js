@@ -36,7 +36,7 @@ const auditSchema = mongoose.model("auditLog");
                     
                     path: ["title", "year", "category", "author"],
                     query: req.query.search,
-                    fuzzy: {}, 
+                    //fuzzy: {}, 
                 },
                 sort: {score: {$meta: "searchScore"}}
             },

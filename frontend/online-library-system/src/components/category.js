@@ -16,7 +16,7 @@ export default function Category({ search, category }) {
         
         console.log(url + '/students/manuscripts' + category + '/?search=' + search)
         // fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
-        fetch(url + '/students/manuscripts/' + category + '/?search=' + search, {
+        fetch(url + '/students/manuscripts/?search=' + search, {
         method: "get",
         })  
         .then(res => res.json())

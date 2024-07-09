@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const path = require('path');
 
 const mongoose = require("mongoose");
 
@@ -47,6 +48,8 @@ router.post("/upload-pdf", upload.single("File"), async (req, res) => {
     const fileDest = req.file.filename;
     const action = "Upload PDF" 
     const date = Date.now()
+
+    console.log(path.extname(fileDest).toLowerCase())
 
     if (!fileDest || path.extname(fileDest).toLowerCase() !== '.pdf') {
         return res.json({ status: "Invalid file format! Please upload a PDF file." });

@@ -114,7 +114,7 @@ export default function Category({ search, category }) {
                                     <dd>{d.year}</dd>
                                 </dl>
                             </td>
-                            <td class="sm:tw-hidden tw-break-words tw-text-wrap tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.author}</td>
+                            <td class="sm:tw-hidden tw-break-words tw-text-wrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.author}</td>
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.category}</td>
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.year}</td>
                         </tr>

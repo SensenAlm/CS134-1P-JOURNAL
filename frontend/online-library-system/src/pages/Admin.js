@@ -62,7 +62,7 @@ export default function Admin() {
                             <div class="mb-3 row">
                                 <label for="titleInput" class="col-sm-2 col-form-label">Author</label>
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" id="authorInput" placeholder="Author" required
+                                    <textarea type="text" class="form-control tw-h-[100px]" id="authorInput" placeholder="Author" required
                                     onChange={(e) => setAuthor(e.target.value)} value={researchAuthor}/>
                                 </div>
                             </div>

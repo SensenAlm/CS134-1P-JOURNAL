@@ -12,7 +12,7 @@ const studInfoSchema = mongoose.model("studInfo");
 
 
 
-router.get("/studentStatus", async (req, res) => {
+router.get("/getCredentials", async (req, res) => {
     var listTable = {};
 
     try {

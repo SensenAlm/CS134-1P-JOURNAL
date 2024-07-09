@@ -9,17 +9,17 @@ export default function Monitor() {
     const [studData, setStud] = useState([]);
     const url = 'http://localhost:8081';
 
-    useEffect(() => {
-        // fetch('http://localhost:8081/reg-list')
-        fetch(url + '/reg-list')
-            .then(res => res.json())
-            .then(credData => setCred(credData))
-            .catch(err => console.log(err));
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:8081/reg-list')
+    //     fetch(url + '/reg-list')
+    //         .then(res => res.json())
+    //         .then(credData => setCred(credData))
+    //         .catch(err => console.log(err));
+    // }, []);
 
     useEffect(() => {
         // fetch('http://localhost:8081/student-list')
-        fetch(url + '/student-list')
+        fetch(url + '/getCredentials')
             .then(res => res.json())
             .then(studData => setStud(studData))
             .catch(err => console.log(err));

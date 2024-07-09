@@ -36,14 +36,14 @@ export default function WarningModal({ visible, titleFile, onConfirmDelete, onCl
                             onClick={(e) => {
                                 onCloseHandle(e);
                             }}
-                            className='tw-w-32 tw-bg-dark-green tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-dark-steel tw-duration-500 tw-text-gray-50'>Cancel</button>
+                            className='tw-w-32 tw-bg-src-yellow tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-yellow tw-duration-500 tw-text-gray-50'>Cancel</button>
                         <button
                             id='button'
                             onClick={(e) => {
                                 onCloseHandle(e);
                                 onConfirmDelete();  
                             }}
-                            className='tw-w-32 tw-bg-dark-green tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-dark-steel tw-duration-500 tw-text-gray-50'>Yes</button>
+                            className='tw-w-32 tw-bg-src-yellow tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-hover-yellow tw-duration-500 tw-text-gray-50'>Yes</button>
                     </div>
                 </div>
             </div>

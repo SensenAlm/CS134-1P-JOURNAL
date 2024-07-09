@@ -161,25 +161,25 @@ router.post('/viewAdd', (req, res) => {
     }
 })
 
-router.post('/downloadAdd', (req, res) => {
-    const title = req.body.Title;
-    var count;
-    try {
-        pdfStatistics.findOne({title: title})
-            .then((data) => {
-                count = data.download;
-                data.download = count + 1;
-                data.save();
+// router.post('/downloadAdd', (req, res) => {
+//     const title = req.body.Title;
+//     var count;
+//     try {
+//         pdfStatistics.findOne({title: title})
+//             .then((data) => {
+//                 count = data.download;
+//                 data.download = count + 1;
+//                 data.save();
                 
-            });
+//             });
         
-            res.send({status: 200});
+//             res.send({status: 200});
 
-    } catch (error) {
+//     } catch (error) {
 
-        res.send(error);
-    }
-})
+//         res.send(error);
+//     }
+// })
 
 router.get('/getCredentials', (req, res) => {
     try {

@@ -36,7 +36,6 @@ mongoose.connect(dbURL,
 .catch(e =>
     console.log(e));
 
-
 app.use('/', postRoutes);
 app.use('/', pdfRoutes);
 app.use('/', tokenRoute);

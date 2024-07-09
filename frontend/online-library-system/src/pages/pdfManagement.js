@@ -36,15 +36,15 @@ export default function PDFManagement() {
             .catch(err => console.log(err));
     }, [deleted, edited]);
 
-    useEffect(() => {
-        // fetch('http://localhost:8081/pdf-statistics', {
-        fetch(url + '/pdf-statistics', {
-            method: "get",
-        })
-            .then(res => res.json())
-            .then(data => setPdfStats(data))
-            .catch(err => console.log(err));
-    }, [deleted, edited]);
+    // useEffect(() => {
+    //     // fetch('http://localhost:8081/pdf-statistics', {
+    //     fetch(url + '/pdf-statistics', {
+    //         method: "get",
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => setPdfStats(data))
+    //         .catch(err => console.log(err));
+    // }, [deleted, edited]);
 
     const editButton = () => {
         const editData = data.map((d) =>

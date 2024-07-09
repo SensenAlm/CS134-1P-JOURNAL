@@ -3,7 +3,6 @@ import axios from "axios";
 import Pagination from "./Pagination";
 import { Link } from 'react-router-dom';
 
-
 export default function Category({ search, category }) {
     const url = 'http://localhost:8081';
     const [data, setData] = useState([]);
@@ -15,8 +14,9 @@ export default function Category({ search, category }) {
     
     useEffect(()=>{
         
+        console.log(url + '/students/manuscripts' + category + '/?search=' + search)
         // fetch('http://localhost:8081/students/manuscripts/' + category + "/?search=" + search, {
-        fetch(url + '/students/manuscripts' + category + '/?search=' + search, {
+        fetch(url + '/students/manuscripts/' + category + '/?search=' + search, {
         method: "get",
         })  
         .then(res => res.json())
@@ -106,13 +106,15 @@ export default function Category({ search, category }) {
                                     {d.title}
                                 </Link>
                                 <dl class="md:tw-hidden">
+                                    <dt class="tw-sr-only">Author</dt>
+                                    <dd class="tw-pt-2 tw-w-[250px]">{d.author}</dd>
                                     <dt class="tw-sr-only">Category</dt>
                                     <dd class="tw-pt-2">{d.category}</dd>
                                     <dt class="tw-sr-only">Year</dt>
                                     <dd>{d.year}</dd>
                                 </dl>
                             </td>
-                            <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.author}</td>
+                            <td class="sm:tw-hidden tw-break-words tw-text-wrap tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.author}</td>
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.category}</td>
                             <td class="sm:tw-hidden tw-whitespace-nowrap tw-py-4 tw-pl-4 tw-pr-3 tw-text-gray-900">{d.year}</td>
                         </tr>

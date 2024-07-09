@@ -62,7 +62,7 @@ export default function Admin() {
                             <div class="mb-3 row">
                                 <label for="titleInput" class="col-sm-2 col-form-label">Author</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="authorInput" placeholder="Author" required
+                                    <textarea type="text" class="form-control" id="authorInput" placeholder="Author" required
                                     onChange={(e) => setAuthor(e.target.value)} value={researchAuthor}/>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ export default function Admin() {
                             </div>
                         </div>
 
-                        <button type="submit" class=" tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-6 tw-border-none tw-outline-none hover:tw-bg-dark-green tw-duration-500 tw-text-white">
+                        <button type="submit" class=" tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-6 tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500 tw-text-white">
                             Submit
                         </button>
                     </form>

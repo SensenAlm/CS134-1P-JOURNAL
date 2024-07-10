@@ -1,9 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../img/RSHS_1_Logo.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 export default function StudLogin() {
 
+    const [done, isDone] = useState(false);
+
+    const Entry = (user, action) => {
+        fetch("https://ipapi.co/json/", {
+            method: "get"
+        })
+        .then(res => res.json())
+        .then(data => {
+            fetch('http://localhost:8081/admin/userEntry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({data, user: user, action})
+            });
+            isDone(true);
+        })
+    }
+
+    console.log("student login");
+    
+
+    useEffect(() => {
+        const token = localStorage.getItem("student") ? console.log("with token"): Entry("Student","Entry");
+    }, [])
+    
     const navigate = useNavigate();
     const [lrn, setLrn] = useState();
     const [password, setPassword] = useState();
@@ -27,17 +54,21 @@ export default function StudLogin() {
         .then(res => res.json())
         .then(data => {
             if (data.status === "Success!") {
+                Entry("Student","Log-in Success")
                 alert(data.status);
                 localStorage.setItem("student", JSON.stringify(data.token));
                 navigate("/category/all");
-                window.location.reload();
+                if(isDone){
+                    window.location.reload()};
             }
             else if (data.status === "Incorrect LRN!") {
+                Entry("Student", "Log-in Failed")
                 alert(data.status);
                 setLrn("");
                 setPassword("");
             }
             else {
+                Entry("Student", "Log-in Failed")
                 alert(data.status);
                 setPassword("");
             }

@@ -81,7 +81,28 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function OTPModal({ otp, token, visible, onClose }) {
+
+    const [done, isDone] = useState(false);
+    const Entry = (user, action) => {
+        fetch("https://ipapi.co/json/", {
+            method: "get"
+        })
+        .then(res => res.json())
+        .then(data =>  {
+            fetch('http://localhost:8081/admin/userEntry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({data, user: user, action})
+            });
+            isDone(true);
+        })
+    }
+
+
     const [one, setOne] = useState("");
     const [two, setTwo] = useState("");
     const [three, setThree] = useState("");
@@ -102,10 +123,15 @@ export default function OTPModal({ otp, token, visible, onClose }) {
 
     const verifyOTP = () => {
         if (userInput === otp) {
+            console.log("modal");
+            Entry("Admin", "Log-in Success");
             localStorage.setItem("admin", JSON.stringify(token));
             navigate("/admin-dashboard");
-            window.location.reload();
+            if (done)
+                {window.location.reload()};
+            
         } else {
+            Entry("Admin", "Log-in Failed");
             alert("Wrong OTP. Please try again!");
             setOne("");
             setTwo("");
@@ -167,9 +193,11 @@ export default function OTPModal({ otp, token, visible, onClose }) {
         }
     }
 
-    if (!visible) return null;
-
-    return (
+    if (!visible){
+        return;
+    }
+    else
+    {return (
         <div className="tw-fixed tw-inset-0 tw-bg-black tw-bg-opacity-25 tw-backdrop-blur-sm tw-flex tw-items-center tw-justify-center">
             <div className="tw-bg-gray-50 tw-rounded-lg tw-shadow-lg md:tw-p-5 sm:tw-w-full sm:tw-mx-5 sm:tw-h-[45%]">
                 <div className="tw-flex tw-flex-row-reverse">
@@ -209,6 +237,6 @@ export default function OTPModal({ otp, token, visible, onClose }) {
                 </div>
             </div>
         </div>
-    )
+    )}
 }
     

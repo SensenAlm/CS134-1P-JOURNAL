@@ -1,9 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../img/RSHS_1_Logo.png';
 import OTPModal from '../components/modal';
 
-export default function AdminLogin() {
 
+export default function AdminLogin() {
+    const Entry = (user, action) => {
+        fetch("https://ipapi.co/json/", {
+            method: "get"
+        })
+        .then(res => res.json())
+        .then(data => {
+            fetch('http://localhost:8081/admin/userEntry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({data, user: user, action})
+            })
+        })
+    }
+    useEffect(()=> {
+        const token = localStorage.getItem("admin") ? console.log("with token"): Entry("Admin","Entry");
+        
+    }, []);
     const [showModal, setModal] = useState(false)
     const handleOnClose = () => setModal(false)
     const [email, setEmail] = useState();
@@ -32,11 +51,15 @@ export default function AdminLogin() {
                 
             }
             else if (data.status === "Incorrect Email!") {
+                console.log("hello");
+                Entry("Admin", "Log-in Failed");
                 alert(data.status);
                 setEmail("");
                 setPass("");
             }
             else {
+                console.log("hello");
+                Entry("Admin", "Log-in Failed");
                 alert(data.status);
                 setPass("");
             }

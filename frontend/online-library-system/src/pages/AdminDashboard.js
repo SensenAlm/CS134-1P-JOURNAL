@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Bar, Pie} from 'react-chartjs-2';
+import { Bar, Pie, Line } from 'react-chartjs-2';
 
 import {
     Chart as ChartJS,
@@ -9,7 +9,9 @@ import {
     Title,
     Tooltip,
     Legend,
-    ArcElement
+    ArcElement,
+    LineElement,
+    PointElement,
   } from 'chart.js';
 
   ChartJS.register(
@@ -19,12 +21,16 @@ import {
     Title,
     Tooltip,
     Legend,
-    ArcElement
+    ArcElement,
+    LineElement,
+    PointElement
+    
   );
   
 export default function AdminDashboard() {
     const [manuscript, setManuscript] = useState({});
     const [student, setStudent] = useState({});
+    const [logs, setLogs] = useState({});
 
     useEffect(() => {
     
@@ -34,15 +40,44 @@ export default function AdminDashboard() {
             .then(res => res.json())
             .then(data => {setManuscript({category: data.manuscript.Category,
                                             total: data.manuscript.Total
-                                        }); setStudent(data.student.Total)})
+                                        });
+                                        setStudent(data.student.Total);
+                                        setLogs(data.logs);})
             .catch(err => console.log(err));
-    
-            console.log(manuscript);
-            console.log(student);
     
     }, [])
     
+    const LineChart = () => {
+      const data = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Number of Entries',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            borderColor: 'rgba(75,192,192,1)',
+            backgroundColor: 'rgba(75,192,192,0.2)',
+            fill: true,
+          },
+          
+        ],
+      };
     
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Line Chart for the Number of Entries',
+          },
+        },
+      };
+    
+      return <Line data={data} options={options} />;
+    };
+
     const PieGraph = () => {
 
         const data = {
@@ -134,6 +169,7 @@ export default function AdminDashboard() {
             <div class='tw-container'>
                 <BarGraph />
                 <PieGraph /> 
+                <LineChart/>
              </div>
         </>
     )

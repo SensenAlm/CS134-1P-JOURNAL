@@ -21,10 +21,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import { AuthorizeAdmin, AuthorizeUser } from "./hooks/authorize";
 
 function App() {
- 
+  console.log("app");
   return (
     <div className='App'>
-        
         <Routes>
           <Route index element={AuthorizeUser() ?<Home/> : <AdminDashboard/>} /> 
           <Route path="login" element={AuthorizeUser()? <Home/>: <StudLogin/>} />

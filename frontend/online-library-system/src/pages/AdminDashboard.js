@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Bar, Pie, Line } from 'react-chartjs-2';
+import Sidebar from '../components/sidebar';
 
 import {
     Chart as ChartJS,
@@ -75,7 +76,9 @@ export default function AdminDashboard() {
         },
       };
     
-      return <Line data={data} options={options} />;
+      return(
+        <Line data={data} options={options} />
+      );
     };
 
     const PieGraph = () => {
@@ -105,10 +108,10 @@ export default function AdminDashboard() {
           };
 
         return (
-            <div>
+            <>
                 <p>Total: {student.registered + student.enrolled}</p>
               <Pie data={data} options={options} />
-            </div>
+            </>
           );
 
     };
@@ -166,6 +169,11 @@ export default function AdminDashboard() {
 
     return (
         <>
+        <div className="tw-flex tw-bg-gray-50 tw-min-h-dvh">
+                <div>
+                    <Sidebar />
+                </div>
+        </div>
             <div class='tw-container'>
                 <BarGraph />
                 <PieGraph /> 

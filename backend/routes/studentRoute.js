@@ -12,32 +12,62 @@ const studInfoSchema = mongoose.model("studInfo");
 
 
 
-router.get("/studentStatus", async (req, res) => {
+router.get("/studentStatus/?", async (req, res) => {
     var listTable = {};
 
-    try {
-        await regStudentsSchema.find({}).then((data) => {
-            listTable = {register: {data}};
-        });
+    const lrn = req.query.lrn;
+    console.log(lrn);
+    
+    if(lrn === ""){
+        try {
+            await regStudentsSchema.find().then((data) => {
+                listTable = {register: {data}};
+                });
+    
+            } catch (error) {
+                console.log(error);
+            }
+        
+        
+    
+            try {
+                await studInfoSchema.find().then((data) => {
+                    listTable = {...listTable, enrolled: {data}};
+                })
+            }
+            catch (error){
+                console.log(error);
+            }
+    
+    
+    
+        res.send({listTable});
+    }
+    else {
+        try {
+            await regStudentsSchema.find({lrn: {$regex: lrn, $options: 'i' }}).then((data) => {
+                listTable = {register: {data}};
+                });
 
-   } catch (error) {
-        console.log(error);
-   }
-   
-  
+        } catch (error) {
+            console.log(error);
+        }
+    
+    
 
-   try {
-    await studInfoSchema.find({}).then((data) => {
-        listTable = {...listTable, enrolled: {data}};
-    })
-   }
-   catch (error){
-    console.log(error);
-   }
+        try {
+            await studInfoSchema.find({lrn: {$regex: lrn, $options: 'i' }}).then((data) => {
+                listTable = {...listTable, enrolled: {data}};
+            })
+        }
+        catch (error){
+            console.log(error);
+        }
 
 
 
-   res.send({listTable});
+        res.send({listTable});
+    }
 })
 
 module.exports = router;

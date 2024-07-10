@@ -11,9 +11,14 @@ export default function Monitor() {
     const [enrolledStud, setEnrolledStud] = useState([]);
     const [registeredStud, setRegisteredStud] = useState([]);
 
+    const [searchVal, setSearch] = useState("");
+    
+    const handleSearch= (searchValue) => {
+        setSearch(searchValue);
+    }
 
     useEffect(() => {
-      fetch("http://localhost:8081/studentStatus", {
+      fetch("http://localhost:8081/studentStatus/?lrn=" + searchVal, {
         method: "get",
         })
       .then(res => res.json())
@@ -23,7 +28,7 @@ export default function Monitor() {
         setRegisteredStud(data.listTable.register.data);
       })
       .catch(err => console.log(err));
-    }, [])
+    }, [searchVal])
 
 
     
@@ -35,7 +40,20 @@ export default function Monitor() {
         };
     });
 
-   
+    useEffect(() => {
+        fetch('http://localhost:8081/reg-list')
+            .then(res => res.json())
+            .then(credData => setCred(credData))
+            .catch(err => console.log(err));
+    }, []);
+
+    useEffect(() => {
+        fetch('http://localhost:8081/student-list')
+            .then(res => res.json())
+            .then(studData => setStud(studData))
+            .catch(err => console.log(err));
+    }, []);
+
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
 
@@ -111,7 +129,7 @@ export default function Monitor() {
                             Export CSV
                         </CSVLink>
                         <div className="tw-ml-auto tw-w-full md:tw-w-1/2 lg:tw-w-1/3">
-                            <Searchbar className="tw-w-max" />
+                            <Searchbar search={handleSearch} className="tw-w-max" />
                         </div>
                     </div>
                     {/* <div className="category table-striped table-responsive tw-w-[100%] sm:tw-w-full tw-flex tw-align-center tw-flex-col">

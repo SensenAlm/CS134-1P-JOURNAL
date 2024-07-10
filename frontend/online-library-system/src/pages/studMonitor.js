@@ -119,30 +119,33 @@ export default function Monitor() {
                             <Searchbar search={handleSearch} className="tw-w-max" />
                         </div>
                     </div>
-                    {/* <div className="category table-striped table-responsive tw-w-[100%] sm:tw-w-full tw-flex tw-align-center tw-flex-col">
+                    <div className="category table-striped table-responsive tw-w-full sm:tw-w-full tw-flex tw-align-center tw-flex-col">
                         <table className="table table-striped tw-text-center">
                             <thead className="tw-text-center">
                                 <tr>
                                     <th scope="col">LRN</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Middle Name</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Date of Registration</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {studData.map((d, i) => (
+                                {statusList.map((d, i) => (
                                     <tr key={i}>
-                                        <th>{d.lrn}</th>
-                                        <td>{d.lastname}</td>
-                                        <td>{d.firstname}</td>
-                                        <td>{d.middlename}</td>
+                                        <td class="tw-px-4 tw-py-3 tw-text-ms tw-font-semibold tw-border">{d.lrn}</td>
+                                        <td class="tw-font-semibold tw-text-black">{d.firstname +" "+ d.lastname}</td>
+                                        <td class="tw-px-4 tw-py-3 tw-text-xs tw-border">
+                                            <span class={`${d.status === "Registered" ? "tw-bg-green" : "tw-bg-red-400"} 
+                                            tw-px-2 tw-py-1 tw-font-semibold tw-leading-tight tw-bg-gray-100 tw-rounded-sm`}>{d.status} </span>
+                                        </td>
+                                        <td class="tw-px-4 tw-py-3 tw-text-sm tw-border">{d.registered}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </div> */}
+                    </div>
                     <div>
-        <section class="tw-container tw-mx-auto tw-p-6 ">
+        {/* <section class="tw-container tw-mx-auto tw-p-6 ">
             <div class="tw-w-full tw-mb-8 tw-overflow-hidden tw-rounded-lg tw-shadow-lg">
                 <div class="tw-w-full tw-overflow-x-auto">
                     <table class="tw-w-full">
@@ -166,7 +169,8 @@ export default function Monitor() {
                                     <td class="tw-px-4 tw-py-3 tw-text-ms tw-font-semibold tw-border">{d.lrn}</td>
 
                                     <td class="tw-px-4 tw-py-3 tw-text-xs tw-border">
-                                        <span className={`${d.status === "Registered" ? "tw-bg-green " : "tw-bg-red-400 "}tw-px-2 tw-py-1 tw-font-semibold tw-leading-tight tw-bg-gray-100 tw-rounded-sm`}>{d.status} </span>
+                                        <span class={`${d.status === "Registered" ? "tw-bg-green" : "tw-bg-red-400"} 
+                                        tw-px-2 tw-py-1 tw-font-semibold tw-leading-tight tw-bg-gray-100 tw-rounded-sm`}>{d.status} </span>
                                     </td>
                     
                                     <td class="tw-px-4 tw-py-3 tw-text-sm tw-border">{d.registered}</td>
@@ -177,7 +181,7 @@ export default function Monitor() {
                     </table>
                 </div>
             </div>
-        </section>
+        </section> */}
 
     </div>
 

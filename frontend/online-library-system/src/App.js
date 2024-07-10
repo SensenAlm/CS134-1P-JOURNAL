@@ -16,7 +16,6 @@ import PhysSci from './pages/Physci';
 import AccountManagement from './pages/accountManagement';
 // import ManageCategory from './pages/ManageCategory';
 import PDFViewer from './pages/pdfViewer';
-import Status from './pages/studentStatus';
 import AdminDashboard from './pages/AdminDashboard';
 import { AuthorizeAdmin, AuthorizeUser } from "./hooks/authorize";
 

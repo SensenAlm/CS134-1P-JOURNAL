@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import logo from '../img/RSHS_1_Logo.png'
 import { useNavigate } from "react-router-dom"
@@ -9,6 +9,34 @@ export default function Register() {
     const [studentPass, setPassword] = useState("");
     const [confirmPass, checkPassword] = useState("");
     const navigate = useNavigate();
+
+    const [done, isDone] = useState(false);
+
+    const Entry = (user, action) => {
+        fetch("https://ipapi.co/json/", {
+            method: "get"
+        })
+        .then(res => res.json())
+        .then(data => {
+            fetch('http://localhost:8081/admin/userEntry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({data, user: user, action})
+            });
+            isDone(true);
+        })
+    }
+
+    console.log("student login");
+    
+
+    useEffect(() => {
+        const token = localStorage.getItem("student") ? console.log("with token"): Entry("Student","Entry");
+    }, [])
+
+    
 
     const submitRegForm= async(e) => {
         e.preventDefault();
@@ -29,6 +57,25 @@ export default function Register() {
             console.log(uploadAPI);
             alert(uploadAPI.data.status);
 
+            fetch('http://localhost:8081/getToken', {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                }),
+                body: JSON.stringify({lrn: studentLrn, password: studentPass, user: "Student"})
+               
+            })
+            .then(res => res.json())
+            .then(data => {
+                
+                    Entry("Student","Register Success")
+                    alert(data.status);
+                    localStorage.setItem("student", JSON.stringify(data.token));
+                    navigate("/category/all");
+                    if(done){
+                        window.location.reload()
+                    };
+            });
             setLrn("");
             setPassword("");
             checkPassword("");

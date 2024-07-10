@@ -14,9 +14,17 @@ export default function PDFManagement() {
     const [deleted, setDelete] = useState();
     const [edited, setEdit] = useState();
 
+
+    const [searchVal, setSearch] = useState("");
+    
+    const handleSearch= (searchValue) => {
+        setSearch(searchValue);
+    }
+
+    
     useEffect(() => {
 
-        fetch('http://localhost:8081/students/manuscripts/?search=', {
+        fetch('http://localhost:8081/students/manuscripts/?search=' + searchVal, {
             method: "get",
         })
             .then(res => res.json())
@@ -29,7 +37,7 @@ export default function PDFManagement() {
             }
             )
             .catch(err => console.log(err));
-    }, [deleted, edited]);
+    }, [searchVal, deleted, edited]);
 
     useEffect(() => {
         fetch('http://localhost:8081/pdf-statistics', {
@@ -132,7 +140,7 @@ export default function PDFManagement() {
 
                 <div class="tw-flex md:tw-mx-20 md:tw-mt-[100px] sm:tw-m-5 tw-align-top tw-flex-col">
                     <div>
-                        <Searchbar />
+                        <Searchbar search={handleSearch}/>
                     </div>
 
                     <div class="table-striped table-responsive md:tw-w-full sm:tw-w-full tw-flex tw-items-center tw-flex-col">

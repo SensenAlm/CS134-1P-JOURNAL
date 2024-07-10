@@ -40,20 +40,6 @@ export default function Monitor() {
         };
     });
 
-    useEffect(() => {
-        fetch('http://localhost:8081/reg-list')
-            .then(res => res.json())
-            .then(credData => setCred(credData))
-            .catch(err => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        fetch('http://localhost:8081/student-list')
-            .then(res => res.json())
-            .then(studData => setStud(studData))
-            .catch(err => console.log(err));
-    }, []);
-
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
 

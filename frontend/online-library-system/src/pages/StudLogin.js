@@ -58,7 +58,7 @@ export default function StudLogin() {
                 alert(data.status);
                 localStorage.setItem("student", JSON.stringify(data.token));
                 navigate("/category/all");
-                if(isDone){
+                if(done){
                     window.location.reload()};
             }
             else if (data.status === "Incorrect LRN!") {

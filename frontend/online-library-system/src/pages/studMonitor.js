@@ -5,8 +5,7 @@ import { CSVLink } from "react-csv";
 import Papa from "papaparse";
 
 export default function Monitor() {
-    const [credData, setCred] = useState([]);
-    const [studData, setStud] = useState([]);
+
 
     const [enrolledStud, setEnrolledStud] = useState([]);
     const [registeredStud, setRegisteredStud] = useState([]);
@@ -40,19 +39,7 @@ export default function Monitor() {
         };
     });
 
-    useEffect(() => {
-        fetch('http://localhost:8081/reg-list')
-            .then(res => res.json())
-            .then(credData => setCred(credData))
-            .catch(err => console.log(err));
-    }, []);
 
-    useEffect(() => {
-        fetch('http://localhost:8081/student-list')
-            .then(res => res.json())
-            .then(studData => setStud(studData))
-            .catch(err => console.log(err));
-    }, []);
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
@@ -122,7 +109,7 @@ export default function Monitor() {
                         />
                         <CSVLink 
                             headers={csvHeaders}
-                            data={studData}
+                            data={enrolledStud}
                             filename={"students.csv"}
                             className="tw-bg-dark-blue tw-text-white tw-py-2 tw-px-4 tw-rounded hover:tw-bg-light-steel tw-duration-500 tw-ml-4"
                             onClick={auditExport}>
@@ -179,7 +166,7 @@ export default function Monitor() {
                                     <td class="tw-px-4 tw-py-3 tw-text-ms tw-font-semibold tw-border">{d.lrn}</td>
 
                                     <td class="tw-px-4 tw-py-3 tw-text-xs tw-border">
-                                        <span class="tw-px-2 tw-py-1 tw-font-semibold tw-leading-tight tw-bg-gray-100 tw-rounded-sm">{d.status} </span>
+                                        <span className={`${d.status === "Registered" ? "tw-bg-green " : "tw-bg-red-400 "}tw-px-2 tw-py-1 tw-font-semibold tw-leading-tight tw-bg-gray-100 tw-rounded-sm`}>{d.status} </span>
                                     </td>
                     
                                     <td class="tw-px-4 tw-py-3 tw-text-sm tw-border">{d.registered}</td>

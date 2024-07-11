@@ -30,7 +30,7 @@ export default function Header() {
                 <Link class="nav-link active" aria-current="page" to="/">
                   <label class="tw-cursor-pointer tw-text-white">Home</label>
                 </Link>
-                <a class="nav-link dropdown-toggle tw-text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {/* <a class="nav-link dropdown-toggle tw-text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <label class="tw-text-white tw-cursor-pointer">Manuscripts</label>
                   </a>
                   <ul class="dropdown-menu">
@@ -54,7 +54,7 @@ export default function Header() {
                       <Link class="dropdown-item" to="/category/robotics">Robotics</Link>
                     </li>
 
-                  </ul>
+                  </ul> */}
                   <Link class="nav-link active" aria-current="page" to="/login">
                     <label class="tw-cursor-pointer tw-text-white" onClick={() => {
                       Delete("student");

@@ -29,32 +29,93 @@ import {
   );
   
 export default function AdminDashboard() {
+
+  
+  
+
     const [manuscript, setManuscript] = useState({});
     const [student, setStudent] = useState({});
     const [logs, setLogs] = useState({});
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const hour = today.getHours();
+
+    const timeData = [];
+
+    const datas = [];
+    
 
     useEffect(() => {
     
-        fetch('http://localhost:8081/admin-dashboard', {
-            method: "get",
-            })  
-            .then(res => res.json())
-            .then(data => {setManuscript({category: data.manuscript.Category,
-                                            total: data.manuscript.Total
-                                        });
-                                        setStudent(data.student.Total);
-                                        setLogs(data.logs);})
-            .catch(err => console.log(err));
+      fetch('http://localhost:8081/admin-dashboard', {
+          method: "get",
+          })  
+          .then(res => res.json())
+          .then(data => {setManuscript({category: data.manuscript.Category,
+                                          total: data.manuscript.Total
+                                      });
+                                      setStudent(data.student.Total);
+                                      setLogs(data.logs);
+                                      })
+          .catch(err => console.log(err));
+  
+  }, [])
     
-    }, [])
+    
+    // const setdataLine = () => {
+      
+      
+    // }
+    
+    console.log("hello");
+    console.log(logs);
+
+    
+    for ( var i = 0; i <= hour; i++) {
+      timeData.push(i);
+      datas.push(0);
+    }
+    if (logs.admin)
+    {logs.admin.forEach(element => {
+
+      var elementDate = new Date(element.date);
+
+      var Elday = elementDate.getDate();
+      var Elmonth = elementDate.getMonth();
+      var Elyear  = elementDate.getFullYear();
+      var Elhour = elementDate.getHours();
+
+      if (Elday === day && Elmonth === month && Elyear === year) {
+        datas[Elhour] = datas[Elhour] + 1;
+      }
+    });}
+
+    if(logs.student)
+    {logs.student.forEach(element => {
+      var elementDate = new Date(element.date);
+
+      var Elday = elementDate.getDate();
+      var Elmonth = elementDate.getMonth();
+      var Elyear  = elementDate.getFullYear();
+      var Elhour = elementDate.getHours();
+
+      if (Elday === day && Elmonth === month && Elyear === year) {
+        datas[Elhour] = datas[Elhour] + 1;
+      }
+    });}
     
     const LineChart = () => {
+
+  
+
       const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: timeData,
         datasets: [
           {
-            label: 'Number of Entries',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            label: 'Number of Entries Day' ,
+            data: datas,
             borderColor: 'rgba(75,192,192,1)',
             backgroundColor: 'rgba(75,192,192,0.2)',
             fill: true,
@@ -72,11 +133,11 @@ export default function AdminDashboard() {
           },
           title: {
             display: true,
-            text: 'Student Traffic',
+            text: 'Student Traffic ' + (month + 1).toString() + " " + day.toString() + ", "  + year.toString(),
           },
         },
       };
-    
+     
       return(
         <>
         <div class="tw-w-[80%] tw-bg-dark-blue tw-m-auto tw-flex tw-flex-col tw-rounded-lg tw-p-[20px]">
@@ -225,6 +286,7 @@ export default function AdminDashboard() {
             <div class="tw-flex tw-flex-row tw-gap-y-5">
               <div class="tw-flex tw-w-[50%]">
                 <BarGraph />
+                
               </div>
               <div class="tw-flex tw-flex-col tw-w-[50%] tw-gap-y-6">
                 <PieGraph />

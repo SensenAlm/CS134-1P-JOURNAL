@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
     host: "smtp.office365.com",
     port: "587",
     auth: {
-        user: "digital_archive_otp@outlook.com",
+        user: "digital.archive.otp@gmail.com",
         pass: "dihjer-raswaG-6rexvo"
     },
 
@@ -84,7 +84,7 @@ router.post("/getToken", async (req, res) => {
                     for (let i = 0; i < 6; i++){
                         code += Math.floor((Math.random() * 10));;
                     }
-
+                    console.log(admin.email)
                     generate2fa(admin.email, code);
                     
                     await auditSchema.create({

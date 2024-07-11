@@ -99,6 +99,8 @@ export default function AccountManagement() {
             </div>
 
             <div class="category table-striped table-responsive tw-w-full tw-flex tw-flex-row tw-justify-center tw-mt-[100px] ">
+              <label className="tw-text-center tw-text-5xl tw-my-[70px]">PDF Management</label>
+
               <div class="tw-w-[50%]">
                 <Searchbar search={handleSearch} />
                 <table class="table table-striped tw-text-center">

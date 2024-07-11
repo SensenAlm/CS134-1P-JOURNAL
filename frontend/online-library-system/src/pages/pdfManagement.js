@@ -139,6 +139,7 @@ export default function PDFManagement() {
                 </div>
 
                 <div class="tw-flex md:tw-mx-20 md:tw-mt-[100px] sm:tw-m-5 tw-align-top tw-flex-col">
+                    <label className="tw-text-center tw-text-5xl tw-my-[70px]">PDF Management</label>
                     <div>
                         <Searchbar search={handleSearch}/>
                     </div>

@@ -42,6 +42,8 @@ export default function Admin() {
             <Sidebar />
 
             <div class="tw-mx-auto tw-my-auto tw-bg-white tw-rounded-lg tw-shadow-lg">
+                <label className="tw-text-center tw-text-5xl">Upload PDF</label>    
+
                 <form class="formStyle sm:tw-w-full tw-p-5 md:tw-w-[500px]" onSubmit={submitFile}>
                     <div class="form-group">
                         <div class="mb-3 row">

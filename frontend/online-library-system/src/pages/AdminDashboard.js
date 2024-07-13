@@ -174,7 +174,7 @@ export default function AdminDashboard() {
 
         return (
             <>
-              <div class="tw-w-[80%] tw-bg-dark-blue tw-m-auto tw-flex tw-flex-col tw-rounded-lg tw-p-[20px]">
+              <div class="tw-m-auto tw-flex tw-flex-col tw-rounded-lg tw-p-[20px]">
                 <div class="tw-flex tw-bg-gray-50 tw-text-center tw-mb-6 tw-flex-row tw-h-[120px] tw-w-full tw-justify-center tw-gap-4">
                   <div class="tw-my-auto tw-text-right tw-pr-[30px]">
                     <i class="bi bi-person-fill tw-text-8xl tw-opacity-[60%]"></i>
@@ -251,19 +251,10 @@ export default function AdminDashboard() {
     }
 
       return (
-        <div class="tw-w-[10%] tw-h-[58%] tw-m-auto tw-flex tw-flex-col tw-bg-red-500 tw-rounded-lg">
-          <div class="tw-flex tw-bg-white tw-text-center tw-rounded-t-lg tw-mb-6 tw-flex-row tw-w-full tw-justify-center tw-gap-4 tw-p-3">
-            {/* <div class="tw-my-auto tw-text-right tw-pr-[30px]">
-              <i class="bi bi-book tw-text-8xl tw-opacity-[60%]"></i>
-            </div> */}
-            <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col">
-              <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Mathematics}</label>
-              <label class="tw-text-lg tw-opacity-[70%] tw-text-wrap">Mathematics Manuscripts</label>
-            </div>
-          </div>
-          {/* <div class="tw-bg-gray-50 tw-flex tw-justify-center">
+        <div class="tw-w-[100%] tw-m-auto tw-flex tw-flex-col">
+          <div class="tw-bg-gray-50 tw-flex tw-justify-center">
             <Bar data={data} options={options} />
-          </div> */}
+          </div>
         </div>
       );
     }
@@ -277,12 +268,47 @@ export default function AdminDashboard() {
           <div class="tw-flex tw-flex-col tw-w-full">
           <label className="tw-text-center tw-text-5xl tw-my-[50px]">Dashboard</label>
             <div class="tw-flex tw-flex-row tw-gap-y-5 tw-flex-wrap">
-              <div class="tw-flex tw-flex-row tw-w-full tw-bg-red-100 tw-h-[50%]">
-                <BarGraph />
+              <div class="tw-flex tw-flex-row tw-w-full tw-h-[45%] tw-bg-red-100 tw-row-span-2 tw-space-x-5 tw-justify-between tw-mx-5">
+
+                <div class="tw-w-auto md:tw-h-[58%] tw-flex tw-flex-col">
+                  <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                    <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Life_Science}</label>
+                    <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
+                    <label class="tw-text-xl tw-opacity-[70%]">Life Science</label>
+                  </div>
+                </div>
+                <div class="tw-w-auto md:tw-h-[58%] tw-flex tw-flex-col">
+                  <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                    <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Mathematics}</label>
+                    <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
+                    <label class="tw-text-xl tw-opacity-[70%]">Mathematics</label>
+                  </div>
+                </div>
+                <div class="tw-w-auto md:tw-h-[58%] tw-flex tw-flex-col">
+                  <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                    <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Social_Science}</label>
+                    <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
+                    <label class="tw-text-xl tw-opacity-[70%]">Social Science</label>
+                  </div>
+                </div>
+                <div class="tw-w-auto md:tw-h-[58%] tw-flex tw-flex-col">
+                  <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                    <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Physical_Science}</label>
+                    <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
+                    <label class="tw-text-xl tw-opacity-[70%]">Physical Science</label>
+                  </div>
+                </div>
+                <div class="tw-w-auto md:tw-h-[58%] tw-flex tw-flex-col">
+                  <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                    <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Robotics}</label>
+                    <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
+                    <label class="tw-text-xl tw-opacity-[70%]">Robotics</label>
+                  </div>
+                </div>
                 {/* <PieGraph /> */}
               </div>
               <div class="tw-flex tw-flex-row tw-w-[50%] tw-gap-y-6">
-                
+                <BarGraph />
                 <LineChart/>
               </div>
             </div>

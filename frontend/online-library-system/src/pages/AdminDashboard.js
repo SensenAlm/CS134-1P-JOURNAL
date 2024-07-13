@@ -100,9 +100,6 @@ export default function AdminDashboard() {
     });}
     
     const LineChart = () => {
-
-  
-
       const data = {
         labels: timeData,
         datasets: [
@@ -271,7 +268,7 @@ export default function AdminDashboard() {
 
             <div class="tw-flex tw-flex-row tw-gap-x-9 tw-justify-center">
               <div class="tw-flex-row tw-w-[70%]">
-                <div class="tw-flex tw-flex-row tw-w-full tw-row-span-2 tw-justify-between tw-mb-5 tw-gap-x-4">
+                <div class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-mb-5 tw-gap-x-4">
 
                   <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
                     <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
@@ -309,9 +306,9 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                 </div>
-                <div class="tw-flex tw-flex-row tw-w-[90%] tw-gap-y-6 tw-flex-wrap tw-justify-center">
-                  <div class="tw-w-[60%]"><BarGraph /></div>
-                  <div class="tw-w-[60%]"><LineChart/></div>
+                <div class="tw-flex tw-flex-row tw-w-[100%] tw-gap-10 tw-flex-wrap tw-justify-between">
+                  <div class="tw-w-[48%]"><BarGraph /></div>
+                  <div class="tw-w-[48%]"><LineChart/></div>
                 </div>
               </div>
 

@@ -309,6 +309,8 @@ export default function AdminDashboard() {
                 <div class="tw-flex tw-flex-row tw-w-[100%] tw-gap-10 tw-flex-wrap tw-justify-between">
                   <div class="tw-w-[48%]"><BarGraph /></div>
                   <div class="tw-w-[48%]"><LineChart/></div>
+                  <div class="tw-w-[48%]"><BarGraph /></div>
+                  <div class="tw-w-[48%]"><LineChart/></div>
                 </div>
               </div>
 

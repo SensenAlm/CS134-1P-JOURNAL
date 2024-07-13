@@ -98,52 +98,53 @@ export default function AccountManagement() {
                 <Sidebar/>
             </div>
 
-            <div class="category table-striped table-responsive tw-w-full tw-flex tw-flex-row tw-justify-center tw-mt-[100px] ">
-              {/* <label className="tw-text-center tw-text-5xl tw-my-[70px]">PDF Management</label> */}
+            <div class="tw-flex tw-flex-col tw-w-full tw">
+              <label className="tw-text-center tw-text-5xl tw-my-[100px]">Account Management</label>
+              <div class="category table-striped table-responsive tw-w-full tw-flex tw-flex-row tw-justify-center ">
+                <div class="tw-w-[50%]">
+                  <Searchbar search={handleSearch} />
+                  <table class="table table-striped tw-text-center">
+                    <thead class="tw-text-center">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">LRN</th>
+                            <th scope="col">Password</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
 
-              <div class="tw-w-[50%]">
-                <Searchbar search={handleSearch} />
-                <table class="table table-striped tw-text-center">
-                  <thead class="tw-text-center">
-                      <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">LRN</th>
-                          <th scope="col">Password</th>
-                          <th scope="col"></th>
-                          <th scope="col"></th>
-                      </tr>
-                  </thead>
+                    <tbody>
+                        {data.map((d, i) => (
+                      
+                        <tr key={i}>
+                            <th scope="row">{i+1}</th>
+                            <td>{d.lrn}</td>
+                            <td>{d.state
+                                ? <input value={d.password} name="password" onChange={(e) => {editValue(e, i)}} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-p-3 focus:tw-shadow-lg
+                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                : <>{d.password}</>}</td>
+                            <td class="tw-w-[30px]">{ d.state
+                                ? <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
+                                    onClick={(e) => {d.state = false; doneButton(e, d)}}>
+                                        <label class="tw-cursor-pointer tw-text-gray-100">Done</label></button>
+                                : <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
+                                    onClick={() => {d.state = true;editButton(d)}}>
+                                        <label class="tw-cursor-pointer tw-text-gray-100">Edit</label></button>
+                            }</td>
+                            <td class="tw-w-[30px]">
+                                <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
+                                    onClick={(e) => deleteButton(e, d._id)}>
+                                        <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
+                            </td>
+                        </tr>
 
-                  <tbody>
-                      {data.map((d, i) => (
-                    
-                      <tr key={i}>
-                          <th scope="row">{i+1}</th>
-                          <td>{d.lrn}</td>
-                          <td>{d.state
-                              ? <input value={d.password} name="password" onChange={(e) => {editValue(e, i)}} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-p-3 focus:tw-shadow-lg
-                                  focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
-                              : <>{d.password}</>}</td>
-                          <td class="tw-w-[30px]">{ d.state
-                              ? <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
-                                  onClick={(e) => {d.state = false; doneButton(e, d)}}>
-                                      <label class="tw-cursor-pointer tw-text-gray-100">Done</label></button>
-                              : <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
-                                  onClick={() => {d.state = true;editButton(d)}}>
-                                      <label class="tw-cursor-pointer tw-text-gray-100">Edit</label></button>
-                          }</td>
-                          <td class="tw-w-[30px]">
-                              <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
-                                  onClick={(e) => deleteButton(e, d._id)}>
-                                      <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
-                          </td>
-                      </tr>
-
-                      ))}
-                  </tbody>
-                </table>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
+          </div>
       </div>
     </>
   )

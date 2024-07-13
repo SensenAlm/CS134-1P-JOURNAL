@@ -138,80 +138,81 @@ export default function PDFManagement() {
                     <Sidebar />
                 </div>
 
-                <div class="tw-flex md:tw-mx-20 md:tw-mt-[100px] sm:tw-m-5 tw-align-top tw-flex-col">
-                    {/* <label className="tw-text-center tw-text-5xl tw-my-[70px]">PDF Management</label> */}
+                <div class="tw-flex md:tw-mx-20 sm:tw-m-5 tw-align-top tw-flex-col">
+                <label className="tw-text-center tw-text-5xl tw-my-[100px]">PDF Management</label>
                     <div>
                         <Searchbar search={handleSearch}/>
                     </div>
 
-                    <div class="table-striped table-responsive md:tw-w-full sm:tw-w-full tw-flex tw-items-center tw-flex-col">
-                        <table class="table table-striped tw-text-center">
-                            <thead class="tw-text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Author</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Year Published</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {data.map((d, i) => (
-
-                                    <tr key={i}>
-                                        <th scope="row">{i + 1}</th>
-                                        <td class="tw-break-words tw-text-left tw-text-wrap tw-pl-4 tw-pr-3 tw-text-gray-900 sm:tw-pl-6 sm:tw-pt-4">{d.state
-                                            ? <input value={d.title} name="title" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
-                                            : <>{d.title}</>}</td>
-                                        <td>{d.state
-                                            ? <textarea value={d.author}  name="author" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[100px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent"></textarea>
-                                            : <>{d.author}</>}</td>
-                                        <td>{d.state
-                                            ? <select name="category" value={d.category} onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent">
-                                                <option value="Mathematics">Mathematics</option>
-                                                <option value="Life Science">Life Science</option>
-                                                <option value="Robotics">Robotics</option>
-                                                <option value="Social Science">Social Science</option>
-                                                <option value="Physical Science">Physical Science</option>
-                                            </select>
-                                            : <>{d.category}</>}</td>
-                                        <td>{d.state
-                                            ? <input value={d.year} name="year" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-p-3 focus:tw-shadow-lg
-                                                focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
-                                            : <>{d.year}</>}</td>
-                                        <td class="tw-w-[30px]">{d.state
-                                            ? <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
-                                                onClick={(e) => { d.state = false; doneButton(e, d) }}>
-                                                <label class="tw-cursor-pointer tw-text-gray-100">Done</label></button>
-                                            : <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
-                                                onClick={() => { d.state = true; editButton(d) }}>
-                                                <label class="tw-cursor-pointer tw-text-gray-100">Edit</label></button>
-                                        }</td>
-                                        <td class="tw-w-[30px]">
-                                            <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
-                                                onClick={
-                                                    // (e) => deleteButton(e, d.title)
-                                                    (e) => {
-                                                        openDeleteWarningModal()
-                                                        setTitleFile(d.title);
-                                                        setDeleteBtnEvent(e);
-                                                    }
-                                                }>
-                                                <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
-                                        </td>
+                        <div class="table-striped table-responsive md:tw-w-full sm:tw-w-full tw-flex tw-items-center tw-flex-col">
+                            <table class="table table-striped tw-text-center">
+                                <thead class="tw-text-center">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Author</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Year Published</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
+                                </thead>
 
-                                ))}
-                            </tbody>
-                        </table>
+                                <tbody>
+                                    {data.map((d, i) => (
+
+                                        <tr key={i}>
+                                            <th scope="row">{i + 1}</th>
+                                            <td class="tw-break-words tw-text-left tw-text-wrap tw-pl-4 tw-pr-3 tw-text-gray-900 sm:tw-pl-6 sm:tw-pt-4">{d.state
+                                                ? <input value={d.title} name="title" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                                : <>{d.title}</>}</td>
+                                            <td>{d.state
+                                                ? <textarea value={d.author}  name="author" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[100px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></textarea>
+                                                : <>{d.author}</>}</td>
+                                            <td>{d.state
+                                                ? <select name="category" value={d.category} onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-px-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent">
+                                                    <option value="Mathematics">Mathematics</option>
+                                                    <option value="Life Science">Life Science</option>
+                                                    <option value="Robotics">Robotics</option>
+                                                    <option value="Social Science">Social Science</option>
+                                                    <option value="Physical Science">Physical Science</option>
+                                                </select>
+                                                : <>{d.category}</>}</td>
+                                            <td>{d.state
+                                                ? <input value={d.year} name="year" onChange={(e) => { editValue(e, i) }} class="tw-rounded-md tw-w-full tw-h-[40px] tw-border-none tw-outline-none tw-ring-1 tw-ring-gray-300 focus:tw-ring-gray-500 focus:tw-ring-1 tw-p-3 focus:tw-shadow-lg
+                                                    focus:tw-duration-500 focus:tw-placeholder-transparent"></input>
+                                                : <>{d.year}</>}</td>
+                                            <td class="tw-w-[30px]">{d.state
+                                                ? <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
+                                                    onClick={(e) => { d.state = false; doneButton(e, d) }}>
+                                                    <label class="tw-cursor-pointer tw-text-gray-100">Done</label></button>
+                                                : <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
+                                                    onClick={() => { d.state = true; editButton(d) }}>
+                                                    <label class="tw-cursor-pointer tw-text-gray-100">Edit</label></button>
+                                            }</td>
+                                            <td class="tw-w-[30px]">
+                                                <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-100"
+                                                    onClick={
+                                                        // (e) => deleteButton(e, d.title)
+                                                        (e) => {
+                                                            openDeleteWarningModal()
+                                                            setTitleFile(d.title);
+                                                            setDeleteBtnEvent(e);
+                                                        }
+                                                    }>
+                                                    <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
+                                            </td>
+                                        </tr>
+
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                {/* </div> */}
             </div >
         </>
     )

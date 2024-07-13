@@ -145,44 +145,6 @@ export default function Monitor() {
                         </table>
                     </div>
                     <div>
-        {/* <section class="tw-container tw-mx-auto tw-p-6 ">
-            <div class="tw-w-full tw-mb-8 tw-overflow-hidden tw-rounded-lg tw-shadow-lg">
-                <div class="tw-w-full tw-overflow-x-auto">
-                    <table class="tw-w-full">
-                        <thead>
-                            <tr class="tw-text-md tw-font-semibold tw-tracking-wide tw-text-left tw-text-gray-900 tw-bg-gray-100 tw-uppercase tw-border-b tw-border-gray-600">
-                                <th class="tw-px-4 tw-py-3">Name</th>
-                                <th class="tw-px-4 tw-py-3">LRN</th>
-                                <th class="tw-px-4 tw-py-3">Status</th>
-                                <th class="tw-px-4 tw-py-3">Date Registered</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tw-bg-white">
-                            {statusList.map((d, i) => (
-                                <tr class="tw-text-gray-700">
-                                    <td class="tw-px-4 tw-py-3 tw-border">
-                                        <div class="tw-flex tw-items-center tw-text-sm">
-                                            <p class="tw-font-semibold tw-text-black">{d.firstname +" "+ d.lastname}</p>
-                                        </div>
-                                    </td>
-                                    
-                                    <td class="tw-px-4 tw-py-3 tw-text-ms tw-font-semibold tw-border">{d.lrn}</td>
-
-                                    <td class="tw-px-4 tw-py-3 tw-text-xs tw-border">
-                                        <span class={`${d.status === "Registered" ? "tw-bg-green" : "tw-bg-red-400"} 
-                                        tw-px-2 tw-py-1 tw-font-semibold tw-leading-tight tw-bg-gray-100 tw-rounded-sm`}>{d.status} </span>
-                                    </td>
-                    
-                                    <td class="tw-px-4 tw-py-3 tw-text-sm tw-border">{d.registered}</td>
-                            </tr>
-                            ))}
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section> */}
-
     </div>
 
 

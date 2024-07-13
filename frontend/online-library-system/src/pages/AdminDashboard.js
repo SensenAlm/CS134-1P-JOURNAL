@@ -30,9 +30,6 @@ import {
   
 export default function AdminDashboard() {
 
-  
-  
-
     const [manuscript, setManuscript] = useState({});
     const [student, setStudent] = useState({});
     const [logs, setLogs] = useState({});
@@ -54,6 +51,8 @@ export default function AdminDashboard() {
           })  
           .then(res => res.json())
           .then(data => {setManuscript({category: data.manuscript.Category,
+                                        // category: data.manuscript.Category.Mathematics,
+                                        // category: data.manuscript.Category.Life_Science,
                                           total: data.manuscript.Total
                                       });
                                       setStudent(data.student.Total);
@@ -258,38 +257,38 @@ export default function AdminDashboard() {
     }
 
       return (
-        <div class="tw-w-[90%] tw-bg-dark-blue tw-m-auto tw-flex tw-flex-col tw-rounded-lg tw-p-[20px]">
-          <div class="tw-flex tw-bg-gray-50 tw-text-center tw-mb-6 tw-flex-row tw-h-[120px] tw-w-full tw-justify-center tw-gap-4">
-            <div class="tw-my-auto tw-text-right tw-pr-[30px]">
+        <div class="tw-w-[10%] tw-h-[58%] tw-m-auto tw-flex tw-flex-col tw-bg-red-500 tw-rounded-lg">
+          <div class="tw-flex tw-bg-white tw-text-center tw-rounded-t-lg tw-mb-6 tw-flex-row tw-w-full tw-justify-center tw-gap-4 tw-p-3">
+            {/* <div class="tw-my-auto tw-text-right tw-pr-[30px]">
               <i class="bi bi-book tw-text-8xl tw-opacity-[60%]"></i>
-            </div>
+            </div> */}
             <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col">
-              <label class="tw-text-6xl tw-text-dark-blue">{manuscript.total}</label>
-              <label class="tw-text-lg tw-opacity-[70%]">Total Journals</label>
+              <label class="tw-text-6xl tw-text-dark-blue">{manuscript.category.Mathematics}</label>
+              <label class="tw-text-lg tw-opacity-[70%] tw-text-wrap">Mathematics Manuscripts</label>
             </div>
           </div>
-          <div class="tw-bg-gray-50 tw-flex tw-justify-center">
-            <Bar data={data} options={options} class="" />
-          </div>
+          {/* <div class="tw-bg-gray-50 tw-flex tw-justify-center">
+            <Bar data={data} options={options} />
+          </div> */}
         </div>
       );
     }
     
     return (
         <>
-        <div className="tw-flex tw-bg-gray-100 tw-min-h-dvh">
+        <div className="tw-flex tw-bg-gray-200 tw-min-h-dvh">
           <div>
               <Sidebar />
           </div>
           <div class="tw-flex tw-flex-col tw-w-full">
-            <h1 class="tw-my-[30px] tw-text-center">Dashboard</h1>
-            <div class="tw-flex tw-flex-row tw-gap-y-5">
-              <div class="tw-flex tw-w-[50%]">
+          <label className="tw-text-center tw-text-5xl tw-my-[50px]">Dashboard</label>
+            <div class="tw-flex tw-flex-row tw-gap-y-5 tw-flex-wrap">
+              <div class="tw-flex tw-flex-row tw-w-full tw-bg-red-100 tw-h-[50%]">
                 <BarGraph />
-                
+                {/* <PieGraph /> */}
               </div>
-              <div class="tw-flex tw-flex-col tw-w-[50%] tw-gap-y-6">
-                <PieGraph />
+              <div class="tw-flex tw-flex-row tw-w-[50%] tw-gap-y-6">
+                
                 <LineChart/>
               </div>
             </div>

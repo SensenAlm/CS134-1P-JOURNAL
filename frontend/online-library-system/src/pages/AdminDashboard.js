@@ -45,22 +45,18 @@ export default function AdminDashboard() {
     
 
     useEffect(() => {
-    
-      fetch('http://localhost:8081/admin-dashboard', {
+      
+       fetch('http://localhost:8081/admin-dashboard', {
           method: "get",
           })  
           .then(res => res.json())
-          .then(data => {setManuscript({category: data.manuscript.Category,
-                                        // category: data.manuscript.Category.Mathematics,
-                                        // category: data.manuscript.Category.Life_Science,
-                                          total: data.manuscript.Total
-                                      });
+          .then(data => {setManuscript(data.manuscript.Category);
                                       setStudent(data.student.Total);
                                       setLogs(data.logs);
                                       })
           .catch(err => console.log(err));
-  
-  }, [])
+      
+  }, []);
     
     
     // const setdataLine = () => {
@@ -68,9 +64,7 @@ export default function AdminDashboard() {
       
     // }
     
-    console.log("hello");
-    console.log(logs);
-
+    
     
     for ( var i = 0; i <= hour; i++) {
       timeData.push(i);
@@ -263,7 +257,7 @@ export default function AdminDashboard() {
               <i class="bi bi-book tw-text-8xl tw-opacity-[60%]"></i>
             </div> */}
             <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col">
-              <label class="tw-text-6xl tw-text-dark-blue">{manuscript.category.Mathematics}</label>
+              <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Mathematics}</label>
               <label class="tw-text-lg tw-opacity-[70%] tw-text-wrap">Mathematics Manuscripts</label>
             </div>
           </div>

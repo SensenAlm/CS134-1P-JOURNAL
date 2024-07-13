@@ -199,7 +199,7 @@ export default function AdminDashboard() {
           datasets: [
             {
               label: 'Total Manuscripts per Category',
-              data: manuscript.category,
+              data: manuscript,
               barPercentage: 1,
               minBarLength: 2,
               backgroundColor: [

@@ -41,7 +41,7 @@ export default function WarningModal({ visible, titleFile, onConfirmDelete, onCl
                             id='button'
                             onClick={(e) => {
                                 onCloseHandle(e);
-                                onConfirmDelete();  
+                                onConfirmDelete(true);  
                             }}
                             className='tw-w-32 tw-bg-dark-green tw-rounded-md tw-h-[40px] tw-px-4 tw-border-none tw-outline-none hover:tw-bg-dark-steel tw-duration-500 tw-text-gray-50'>Yes</button>
                     </div>

@@ -35,7 +35,9 @@ export default function AdminDashboard() {
     const [manuscript, setManuscript] = useState({});
     const [student, setStudent] = useState({});
     const [logs, setLogs] = useState({});
-    const [views, setViews] = useState({})
+    const [views, setViews] = useState({});
+
+
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth();
@@ -53,7 +55,8 @@ export default function AdminDashboard() {
           method: "get",
           })  
           .then(res => res.json())
-          .then(data => {console.log(data);setManuscript(data.manuscript.Category);
+          .then(data => {console.log(data);
+                          setManuscript(data.manuscript.Category);
                                       setStudent(data.student.Total);
                                       setLogs(data.logs);
                                       setViews(data.views);
@@ -63,17 +66,17 @@ export default function AdminDashboard() {
   }, []);
     
     
-    // const setdataLine = () => {
-      
-      
-    // }
     
     
-    console.log(views.Category);
+    
+    
+
+
     for ( var i = 0; i <= hour; i++) {
       timeData.push(i);
       datas.push(0);
     }
+
     if (logs.admin)
     {logs.admin.forEach(element => {
 
@@ -308,7 +311,7 @@ export default function AdminDashboard() {
           <div>
               <Sidebar />
           </div>
-
+          {views.Category ?
           <div class="tw-flex tw-flex-col tw-w-full">
           <label className="tw-text-center tw-text-5xl tw-my-[50px]">Dashboard</label>
 
@@ -406,7 +409,11 @@ export default function AdminDashboard() {
               
             </div>
           </div>
+          : <p>Initializing</p> }
+
+          
         </div>
+        
         
         </>
     )

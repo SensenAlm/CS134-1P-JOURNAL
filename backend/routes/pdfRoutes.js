@@ -123,28 +123,28 @@ const auditSchema = mongoose.model("auditLog");
 //     }
 //  })
 
-// router.post('/delete-pdf', (req, res) => {
-//     const action = "Delete PDF" 
-//     const date = Date.now()
+router.post('/delete-pdf', (req, res) => {
+    const action = "Delete PDF" 
+    const date = Date.now()
 
-//     PdfDetailsSchema.deleteOne({title: req.body.title})
-//     .then(result => {
-//         pdfStatistics.deleteOne({title: req.body.title})
-//         .then(result => {
-//             res.send({status: req.body.title+" Deleted"});
-//         })
-//         .catch(error => {
-//             res.send(error);
-//         })
+    PdfDetailsSchema.deleteOne({title: req.body.title})
+    .then(result => {
+        pdfStatistics.deleteOne({title: req.body.title})
+        .then(result => {
+            res.send({status: req.body.title+" Deleted"});
+        })
+        .catch(error => {
+            res.send(error);
+        })
         
-//         auditSchema.create({
-//             action: action,
-//             date: date})
-//     })
-//     .catch(error => {
-//         res.send(error);
-//     })
-
+        auditSchema.create({
+            action: action,
+            date: date})
+    })
+    .catch(error => {
+        res.send(error);
+    })
+})
 
 router.post('/edit-pdf', async (req, res) => {
     const id = req.body.data._id;

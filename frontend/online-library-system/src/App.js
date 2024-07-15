@@ -23,7 +23,7 @@ function App() {
   return (
     <div className='App'>
         <Routes>
-          <Route index element={AuthorizeUser() ?<Home/> : <AdminDashboard/>} /> 
+          <Route index element={AuthorizeUser() ?<Home/> : <StudLogin/>} /> 
           <Route path="login" element={AuthorizeUser()? <Home/>: <StudLogin/>} />
           <Route path="register" element={AuthorizeUser()? <Home/> : <Register/>} />
           <Route path="category/all" element={AuthorizeUser() ?<Home/> : <StudLogin/>}/>
@@ -33,7 +33,7 @@ function App() {
           <Route path="category/socialscience" element={AuthorizeUser() ? <SocSci/> : <StudLogin/>} />
           <Route path="category/physicalscience" element={AuthorizeUser() ? <PhysSci/> : <StudLogin/>} />
           <Route path="pdfview/:dest" element={AuthorizeUser() ? <PDFViewer/> : <StudLogin/>} />
-          <Route path="admin-login" element={<AdminLogin/>} />
+          <Route path="admin-login" element={AuthorizeAdmin() ? <AdminDashboard/> : <AdminLogin/>} />
           <Route path="admin-monitor" element={AuthorizeAdmin() ? <Monitor/> : <AdminLogin/>} />
           <Route path="admin-access" element={AuthorizeAdmin() ? <Admin/> : <AdminLogin/>} />
           <Route path="admin-pdf-management" element={AuthorizeAdmin() ? <PDFManagement/> : <AdminLogin/>} />

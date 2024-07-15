@@ -100,7 +100,7 @@ export default function Category({ search }) {
                     {currentPost.map((d, i) => (
                         <tr key={i}>
                             <td class="tw-break-words tw-text-left tw-text-wrap tw-pl-4 tw-pr-3 tw-text-gray-900 sm:tw-pl-6 sm:tw-pt-4">
-                                <Link to={`/pdfView/${d.destination}`} onClick={updStat}>
+                                <Link to={`/pdfView/${d.destination}`} onClick={()=>updStat(d.destination, d.title)}>
                                     {d.title}
                                 </Link>
                                 <dl class="md:tw-hidden">

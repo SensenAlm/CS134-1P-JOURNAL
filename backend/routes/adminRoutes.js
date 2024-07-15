@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
+const hastText = require("../Encrypt/encrypt");
+const hashText = require("../Encrypt/encrypt");
 
 require("../Schema/pdfDetails"); 
 const PdfDetailsSchema = mongoose.model("PdfDetails");
@@ -16,12 +17,49 @@ const studInfoSchema = mongoose.model("studInfo");
 require("../Schema/entryLogs");
 const entrySchema = mongoose.model("entrylog");
 
+require("../Schema/pdfStatistics");
+const pdfStat = mongoose.model("pdfstat");
+
 
 router.get('/admin-dashboard', async (req, res)=> {
     var dashboardInfo = {};
+    var count = 0;
+    var mathCount = 0;
+    var lifeSciCount = 0;
+    var socSciCount = 0;
+    var physSciCount = 0;
+    var roboticsCount = 0;
 
     try {
-        
+        await pdfStat.find({}).then((data) => {
+            data.map(async (d,i) => {
+                count += d.view;
+
+                await PdfDetailsSchema.find({title: d.title}).then((data) => {
+                    data.map((x,y) => {
+                        if (x.category === "Mathematics") {
+                            mathCount += d.view;
+                        }
+
+                        else if (x.category === "Life Science") {
+                            lifeSciCount += d.view;
+                        }
+
+                        else if (x.category === "Social Science") {
+                            socSciCount += d.view;
+                        }
+
+                        else if (x.category === "Physical Science") {
+                            physSciCount += d.view;
+                        }
+
+                        else if (x.category === "Robotics") {
+                            roboticsCount += d.view;
+                        }
+                    })
+                })
+            })
+        })
         dashboardInfo = {
                             manuscript:
                             {
@@ -36,7 +74,19 @@ router.get('/admin-dashboard', async (req, res)=> {
 
 
                             },
-                        
+                            views:
+                            {
+                                Total: count,
+                                Category: {
+                                    Mathematics: mathCount,
+                                    Life_Science: lifeSciCount,
+                                    Social_Science: socSciCount,
+                                    Physical_Science: physSciCount,
+                                    Robotics: roboticsCount,
+                                }
+                            },
+
+
                             student:
                             {
                                 Total: {
@@ -62,6 +112,17 @@ router.get('/admin-dashboard', async (req, res)=> {
     res.status(200).send(dashboardInfo);
 })
 
+
+router.post("/admin/editPassword/?", async (req, res) => {
+    var id = req.query['id'];
+
+    await regStudentsSchema.findById(id)
+    .then((data) => {
+        data.password = hashText("ch@ngeMe");
+        data.save();
+        res.send({status: "Changing Password Success!"});
+    });
+})
 
 router.post("/admin/userEntry", async (req, res) => {
     const ip = req.body.data.ip;

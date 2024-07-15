@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-
+const hashText = require("../Encrypt/encrypt");
 
 const mongoose = require("mongoose");
 require("../Schema/regStudents");
@@ -34,7 +34,7 @@ router.post("/getToken", async (req, res) => {
     if(req.body.user === "Student")
     {
         const lrn = req.body.lrn;
-        const password = req.body.password;
+        const password = hashText(req.body.password);
         //123546asdf
         try {
             const student = await regStudentsSchema.findOne({lrn})

@@ -10,6 +10,31 @@ const regStudentsSchema = mongoose.model("regStudents");
 require("../Schema/studInfo");
 const studInfoSchema = mongoose.model("studInfo");
 
+router.get('/getCredentials/?', async (req, res) => {
+    const lrn = req.query.lrn;
+
+    if (lrn === ""){
+        try {
+            await regStudentsSchema.find({})
+            .then((data) => {
+                res.send(data);
+            })
+        } catch (error) {
+            res.send(error);
+        }
+    }
+
+    else {
+        try {
+            await regStudentsSchema.find({lrn: {$regex: lrn, $options: 'i' }}).then((data) => {
+                res.send(data);
+                });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+})
 
 router.get("/studentStatus/?", async (req, res) => {
     var listTable = {};

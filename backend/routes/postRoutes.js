@@ -140,10 +140,15 @@ router.post("/register-stud", upload.single("Form"), async (req, res) => {
     }
 })
 
-router.get('/login', (req, res) => {
+router.post('/login?', (req, res) => {
     try {
-        regStudentsSchema.find({}).then((data) => {
-            res.send(data);
+        regStudentsSchema.find({lrn: req.query['lrn']}).then((data) => {
+            if (hashText(req.query['password']) === data[0].password) {
+                res.status(200).send({status: "Success!"})
+            }
+            else {
+                res.status(401).send({status: "Error Logging in!"})
+            }
         });
     } catch (error) {
         res.json({status: "Student not found!"});
@@ -156,8 +161,10 @@ router.post('/viewAdd', (req, res) => {
     try {
         pdfStatistics.findOne({title: title})
             .then((data) => {
+                console.log(data.view);
                 count = data.view;
                 data.view = count + 1;
+                console.log(data.view);
                 data.save();
                 res.send({status: 200});
             });
@@ -188,16 +195,7 @@ router.post('/downloadAdd', (req, res) => {
     }
 })
 
-router.get('/getCredentials', (req, res) => {
-    try {
-        regStudentsSchema.find({})
-        .then((data) => {
-            res.send(data);
-        })
-    } catch (error) {
-        res.send(error);
-    }
-})
+
 
 router.post('/editCredentials', (req, res) => {
     const id = req.body.data._id;
@@ -212,7 +210,7 @@ router.post('/editCredentials', (req, res) => {
     try {
         regStudentsSchema.findById(id)
         .then((data) => {
-            data.password = req.body.data.password;
+            data.password = hashText(req.body.data.password);
             data.save();
             res.send({status: "Changing Password Success!"});
         });
@@ -322,6 +320,7 @@ router.post('/audit-export', async (req, res) => {
         date: date
     })
 });
+
 
 router.post('/test/?', (req, res) => {
     console.log(hashText);

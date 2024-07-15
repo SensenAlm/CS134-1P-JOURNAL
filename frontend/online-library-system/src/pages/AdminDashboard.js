@@ -13,6 +13,7 @@ import {
     ArcElement,
     LineElement,
     PointElement,
+    
   } from 'chart.js';
 
   ChartJS.register(
@@ -24,7 +25,8 @@ import {
     Legend,
     ArcElement,
     LineElement,
-    PointElement
+    PointElement,
+    
     
   );
   
@@ -33,6 +35,7 @@ export default function AdminDashboard() {
     const [manuscript, setManuscript] = useState({});
     const [student, setStudent] = useState({});
     const [logs, setLogs] = useState({});
+    const [views, setViews] = useState({})
     const today = new Date();
     const day = today.getDate();
     const month = today.getMonth();
@@ -50,9 +53,10 @@ export default function AdminDashboard() {
           method: "get",
           })  
           .then(res => res.json())
-          .then(data => {setManuscript(data.manuscript.Category);
+          .then(data => {console.log(data);setManuscript(data.manuscript.Category);
                                       setStudent(data.student.Total);
                                       setLogs(data.logs);
+                                      setViews(data.views);
                                       })
           .catch(err => console.log(err));
       
@@ -65,7 +69,7 @@ export default function AdminDashboard() {
     // }
     
     
-    
+    console.log(views.Category);
     for ( var i = 0; i <= hour; i++) {
       timeData.push(i);
       datas.push(0);
@@ -131,7 +135,7 @@ export default function AdminDashboard() {
       return(
         <>
         <div class="tw-w-[100%] tw-m-auto tw-shadow-md">
-          <div class="tw-bg-gray-50">
+          <div class="tw-bg-gray-50 tw-rounded-md">
             <Line data={data} options={options} />
           </div>
         </div>
@@ -142,11 +146,11 @@ export default function AdminDashboard() {
     const PieGraph = () => {
 
         const data = {
-            labels: ['Registered Students', 'Enrolled Students'],
+            labels: ['Registered Students', 'Unregistered'],
             datasets: [
                 {
                     label: 'Total Number of Students',
-                    data: [student.registered, student.enrolled],
+                    data: [student.registered, student.enrolled - student.registered],
                     backgroundColor: [
                         'rgba(255, 205, 86, 0.7)',
                         'rgb(54, 162, 235, 0.7)',
@@ -164,11 +168,11 @@ export default function AdminDashboard() {
               },
               title: {
                 display: true,
-                text: 'Enrolled Students vs. Registered Students'
+                text: 'Unregistered Students vs. Registered Students'
               }
             },
           };
-
+          
         return (
             <>
               <div class="tw-flex tw-flex-col ">
@@ -177,7 +181,7 @@ export default function AdminDashboard() {
                     <i class="bi bi-person-fill tw-text-8xl tw-opacity-[60%]"></i>
                   </div>
                   <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col">
-                    <label class="tw-text-6xl tw-text-dark-blue">{student.enrolled + student.registered}</label>
+                    <label class="tw-text-6xl tw-text-dark-blue">{student.enrolled}</label>
                     <label class="tw-text-lg tw-opacity-[70%]">Total Students</label>
                   </div>
                 </div>
@@ -187,7 +191,59 @@ export default function AdminDashboard() {
               </div>
             </>
           );
+    };
 
+    const ViewsPie = () => {
+
+      const data = {
+          labels: ['Views in Category'],
+          datasets: [
+              {
+                  label: 'Views in Category',
+                  data: [views.Category.Mathematics, views.Category.Life_Science, views.Category.Physical_Science, views.Category.Social_Science, views.Category.Robotics],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.7)',
+                      'rgba(255, 159, 64, 0.7)',
+                      'rgba(255, 205, 86, 0.7)',
+                      'rgba(75, 192, 192, 0.7)',
+                      'rgba(54, 162, 235, 0.7)',
+                        ]
+              },
+              
+          ]
+      }
+
+      const NewOptions = {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: 'Categorical Views'
+            }
+          },
+        };
+
+    return (
+        
+          <div class="tw-flex tw-flex-col ">
+            <div class="tw-flex tw-bg-gray-50 tw-text-center tw-flex-row tw-h-[120px] tw-w-full tw-justify-center tw-p-5 tw-rounded-t-md tw-shadow-md">
+              <div class="tw-my-auto tw-text-right tw-pr-[30px]">
+                <i class="bi bi-eye tw-text-8xl tw-opacity-[60%]"></i>
+              </div>
+              <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col">
+                <label class="tw-text-6xl tw-text-dark-blue">{views.Total}</label>
+                <label class="tw-text-lg tw-opacity-[70%]">Total Views</label>
+              </div>
+            </div>
+            <div class="tw-bg-gray-50 tw-flex tw-rounded-md tw-shadow-md tw-pb-3">
+              <Pie data={data} options={NewOptions}/>
+            </div>
+          </div>
+        
+      );
     };
 
     const BarGraph = () => {
@@ -219,37 +275,27 @@ export default function AdminDashboard() {
             },
           ],
         };
-    
-    
-      const graphStyle = {
-          minHeight: "10rem",
-          maxWidth: "540px",
-          width: "100%",
-          border: "1px solid #C4C4C4",
-          borderRadius: "0.375rem",
-          padding: "0.5rem",
-      };
 
-    const options = {
-      plugins: {
-        legend: {
-          display: false, // Hide the legend
+      const options = {
+        plugins: {
+          legend: {
+            display: false, // Hide the legend
+          },
+          title: {
+            display: true,
+            text: 'Total Journals per Category'
+          }
         },
-        title: {
-          display: true,
-          text: 'Total Journals per Category'
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
         }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
       }
-    }
 
       return (
         <div class="tw-w-[100%] tw-m-auto tw-flex tw-flex-col tw-shadow-md">
-          <div class="tw-bg-gray-50">
+          <div class="tw-bg-gray-50 tw-rounded-md">
             <Bar data={data} options={options} />
           </div>
         </div>
@@ -274,52 +320,94 @@ export default function AdminDashboard() {
                     <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
                       <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Life_Science}</label>
                       <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
-                      <label class="tw-text-xl tw-opacity-[70%]">Life Science</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Life Science</label>
                     </div>
                   </div>
                   <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
                     <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
                       <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Mathematics}</label>
                       <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
-                      <label class="tw-text-xl tw-opacity-[70%]">Mathematics</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Mathematics</label>
                     </div>
                   </div>
                   <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
                     <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
                       <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Social_Science}</label>
                       <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
-                      <label class="tw-text-xl tw-opacity-[70%]">Social Science</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Social Science</label>
                     </div>
                   </div>
                   <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
                     <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
                       <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Physical_Science}</label>
                       <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
-                      <label class="tw-text-xl tw-opacity-[70%]">Physical Science</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Physical Science</label>
                     </div>
                   </div>
                   <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
                     <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
                       <label class="tw-text-6xl tw-text-dark-blue">{manuscript.Robotics}</label>
                       <label class="tw-text-sm tw-opacity-[70%]">Manuscripts</label>
-                      <label class="tw-text-xl tw-opacity-[70%]">Robotics</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Robotics</label>
                     </div>
                   </div>
                 </div>
+
+                <div class="tw-flex tw-flex-row tw-w-full tw-justify-between tw-mb-5 tw-gap-x-4">
+                  <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
+                    <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                      <label class="tw-text-6xl tw-text-dark-blue">{views.Category.Life_Science}</label>
+                      <label class="tw-text-sm tw-opacity-[70%]">Views</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Life Science</label>
+                    </div>
+                  </div>
+                  <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
+                    <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                      <label class="tw-text-6xl tw-text-dark-blue">{views.Category.Mathematics}</label>
+                      <label class="tw-text-sm tw-opacity-[70%]">Views</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Mathematics</label>
+                    </div>
+                  </div>
+                  <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
+                    <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                      <label class="tw-text-6xl tw-text-dark-blue">{views.Category.Social_Science}</label>
+                      <label class="tw-text-sm tw-opacity-[70%]">Views</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Social Science</label>
+                    </div>
+                  </div>
+                  <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
+                    <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                      <label class="tw-text-6xl tw-text-dark-blue">{views.Category.Physical_Science}</label>
+                      <label class="tw-text-sm tw-opacity-[70%]">Views</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Physical Science</label>
+                    </div>
+                  </div>
+                  <div class="tw-w-[100%] md:tw-h-[58%] tw-flex tw-flex-col">
+                    <div class="tw-my-auto tw-font-roboto tw-text-left tw-flex tw-flex-col tw-bg-white tw-rounded-lg tw-p-4 tw-shadow-md">
+                      <label class="tw-text-6xl tw-text-dark-blue">{views.Category.Robotics}</label>
+                      <label class="tw-text-sm tw-opacity-[70%]">Views</label>
+                      <label class="tw-text-xl tw-opacity-[70%] tw-text-nowrap">Robotics</label>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="tw-flex tw-flex-row tw-w-[100%] tw-gap-10 tw-flex-wrap tw-justify-between">
-                  <div class="tw-w-[48%]"><BarGraph /></div>
-                  <div class="tw-w-[48%]"><LineChart/></div>
-                  <div class="tw-w-[48%]"><BarGraph /></div>
-                  <div class="tw-w-[48%]"><LineChart/></div>
+                  <div class="md:tw-w-[47%] lg:tw-w-[48%]"><BarGraph /></div>
+                  <div class="md:tw-w-[47%] lg:tw-w-[48%]"><LineChart/></div>
                 </div>
               </div>
 
-              <div class="">
-                <PieGraph />
+              
+
+              <div class="tw-flex tw-flex-col tw-gap-y-5 tw-mb-5">
+                <PieGraph/>
+                <ViewsPie/>
               </div>
+              
             </div>
           </div>
         </div>
+        
         </>
     )
 }

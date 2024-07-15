@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar';
 import Searchbar from '../components/searchbar';
+import WarningModal from '../components/warningModal';
 
 export default function AccountManagement() {
   const [data, setData] = useState([]);
+  const [warningVisible, setWarningVisible] = useState(false);
   const [primaryPass, setPass] = useState();
   const [isDeleted, setDeleted] = useState();
+  const [studID, setID] = useState("");
+  const [lrn, setLrn] =useState("");
   const [searchVal, setSearch] = useState("");
+  const [deleteBtnEvent, setDeleteBtnEvent] = useState(null);
+
+  const openDeleteWarningModal = () => {
+    setWarningVisible(true);
+  }
+  const closeDeleteWarningModal = () => {
+      setWarningVisible(false);
+  }
+  const confirmDeleteWarningModal = () => {
+      deleteButton(deleteBtnEvent, studID)
+  }
 
   useEffect(() => {
-    fetch('http://localhost:8081/getCredentials', {
+    fetch('http://localhost:8081/getCredentials/?lrn=' + searchVal, {
         method: "get",
         })  
         .then(res => res.json())
@@ -21,7 +36,7 @@ export default function AccountManagement() {
             )
         .catch(err => console.log(err));
     
-  }, [isDeleted]);
+  }, [searchVal, isDeleted]);
   
   const handleSearch= (searchValue) => {
     setSearch(searchValue);
@@ -29,12 +44,20 @@ export default function AccountManagement() {
 
   const editButton = (d) => {
 
-    setPass(d.password);
+    // fetch('http://localhost:8081/admin/editPassword/?id='+d._id,{
+    //   method: "POST",
+    // })
+    
 
-    const editData = data.map((d) =>
-       ( {...d }) )
+    // .then(res => res.json())
+    // .then(data => alert(data.status))
+    // .catch(err => console.log(err));
+
+    
+     const editData = data.map((d) =>
+        ( {...d}) )
        
-    setData(editData); 
+     setData(editData); 
   }
 
   const deleteButton = (e, id) => {
@@ -93,6 +116,12 @@ export default function AccountManagement() {
 
   return (
     <>
+      <WarningModal
+          visible={warningVisible}
+          titleFile={lrn}
+          onConfirmDelete={confirmDeleteWarningModal}
+          onClose={closeDeleteWarningModal}
+      />
       <div class="tw-flex tw-bg-gray-50 tw-min-h-dvh">
             <div>
                 <Sidebar/>
@@ -100,10 +129,10 @@ export default function AccountManagement() {
 
             <div class="tw-flex tw-flex-col tw-w-full tw">
               <label className="tw-text-center tw-text-5xl tw-my-[100px]">Account Management</label>
-              <div class="category table-striped table-responsive tw-w-full tw-flex tw-flex-row tw-justify-center ">
-                <div class="tw-w-[50%]">
+              <div class="category table-striped table-responsive tw-w-full tw-flex tw-flex-row tw-justify-center">
+                <div class="tw-w-full tw-mx-10">
                   <Searchbar search={handleSearch} />
-                  <table class="table table-striped tw-text-center">
+                  <table class="table table-striped tw-text-center tw-w-full">
                     <thead class="tw-text-center">
                         <tr>
                             <th scope="col">#</th>
@@ -134,7 +163,15 @@ export default function AccountManagement() {
                             }</td>
                             <td class="tw-w-[30px]">
                                 <button class="tw-bg-dark-blue tw-rounded-md tw-h-[40px] tw-px-4 tw-w-full tw-border-none tw-outline-none hover:tw-bg-light-steel tw-duration-500" 
-                                    onClick={(e) => deleteButton(e, d._id)}>
+                                    onClick={
+                                      // (e) => deleteButton(e, d._id)
+                                      (e) => {
+                                        openDeleteWarningModal()
+                                        setID(d._id);
+                                        setLrn(d.lrn);
+                                        setDeleteBtnEvent(e);
+                                      }
+                                      }>
                                         <label class="tw-cursor-pointer tw-text-gray-100">Delete</label></button>
                             </td>
                         </tr>

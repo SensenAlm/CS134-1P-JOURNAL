@@ -3,6 +3,8 @@ import axios from "axios"
 import logo from '../img/RSHS_1_Logo.png'
 import { useNavigate } from "react-router-dom"
 
+import { AuthorizeUser } from "../hooks/authorize"
+
 export default function Register() {
 
     const [studentLrn, setLrn] = useState("");
@@ -14,13 +16,13 @@ export default function Register() {
     const submitRegForm = async (e) => {
         e.preventDefault();
 
-        const specialCharacter = /[!@#$%^&*(),.?":{}|<>]/;
+   //     const specialCharacter = /[!@#$%^&*(),.?":{}|<>]/;
 
         if (studentPass.length < 8) {
             alert("Password must be at least 8 characters!");
 
-        } else if (!specialCharacter.test(studentPass)) {
-            alert("Password must contain at least one special character!");
+  //      } else if (!specialCharacter.test(studentPass)) {
+  //          alert("Password must contain at least one special character!");
         } else if (studentPass !== confirmPass) {
             alert("Password does not match!");
             setPassword("");
@@ -43,9 +45,26 @@ export default function Register() {
             console.log(uploadAPI);
             alert(uploadAPI.data.status);
 
-            setLrn("");
-            setPassword("");
-            checkPassword("");
+            fetch('http://localhost:8081/getToken', {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json",
+                }),
+                body: JSON.stringify({lrn: studentLrn, password: studentPass, user: "Student"})
+               
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "Success!") {
+                    
+                    alert(data.status);
+                    localStorage.setItem("student", JSON.stringify(data.token));
+                    navigate("/category/all");
+                    
+                    window.location.reload();
+                }
+            }
+            )
         }
     }
 

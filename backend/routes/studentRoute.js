@@ -11,7 +11,6 @@ require("../Schema/studInfo");
 const studInfoSchema = mongoose.model("studInfo");
 
 
-
 router.get("/studentStatus/?", async (req, res) => {
     var listTable = {};
 
@@ -69,5 +68,6 @@ router.get("/studentStatus/?", async (req, res) => {
         res.send({listTable});
     }
 })
+
 
 module.exports = router;

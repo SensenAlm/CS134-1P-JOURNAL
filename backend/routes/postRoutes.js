@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const path = require('path');
 
+
+const hashText = require("../Encrypt/encrypt");
+
+
 const mongoose = require("mongoose");
 
 require("../Schema/pdfDetails"); 
@@ -21,6 +25,7 @@ const auditSchema = mongoose.model("auditLog")
 
 //MULTER FOR FILE UPLOAD
 const multer  = require('multer');
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './uploads')
@@ -94,7 +99,7 @@ router.post("/upload-pdf", upload.single("File"), async (req, res) => {
 router.post("/register-stud", upload.single("Form"), async (req, res) => {
 
     const lrn = req.body.lrn;
-    const password = req.body.password;
+    const password = hashText(req.body.password);
     const regDate = Date.now();
 
     try {
@@ -317,5 +322,12 @@ router.post('/audit-export', async (req, res) => {
         date: date
     })
 });
+
+router.post('/test/?', (req, res) => {
+    console.log(hashText);
+    console.log(hashText(req.query.text));
+    
+    res.status(200).send();
+})
 
 module.exports = router;
